@@ -67,7 +67,7 @@ public class StoryDAO {
             }
             story.put("chapters", listchapter);
             story.put("newest_chap", newest_chap);
-            story.put("update_date", System.currentTimeMillis());
+            story.put("update_date", System.currentTimeMillis()/1000);
 
             // End create object Story
             // Start insert DB
