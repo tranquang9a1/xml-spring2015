@@ -5,6 +5,7 @@
 package com.crawler.dao;
 
 import com.crawler.entity.Story;
+import com.crawler.xml.DomConvert;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -52,7 +53,11 @@ public class StoryDAO {
             story.put("author", author);
             story.put("status", status);
             story.put("source", source);
-            story.put("type", type);
+            BasicDBList typeList = new BasicDBList();
+            for (String genre : type.split(",")) {
+                typeList.add(genre);
+            }
+            story.put("type", typeList);
             story.put("image", image);
             story.put("description", description);
             BasicDBList listchapter = new BasicDBList();
@@ -68,10 +73,11 @@ public class StoryDAO {
             story.put("chapters", listchapter);
             story.put("newest_chap", newest_chap);
             story.put("update_date", System.currentTimeMillis()/1000);
-
             // End create object Story
             // Start insert DB
-            
+            // Create XML file 
+            DomConvert domConvert = new DomConvert();
+            domConvert.convertXML(DomConvert.ObjectToStoryType(title, author, status, source, type, image, description, result));
             collection.insert(story);
             
             // End insert DB

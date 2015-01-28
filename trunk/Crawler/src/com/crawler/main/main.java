@@ -36,8 +36,8 @@ public class main {
      */
     public static void main(String[] args) {
         ParserFromMangaHead.getStoriesMangaHead();
-        ParserFromKissManga.getStoriesKissManga();
-        ParserFromIZManga.getStoriesIZManga();
+//        ParserFromKissManga.getStoriesKissManga();
+//        ParserFromIZManga.getStoriesIZManga();
 
     }
 

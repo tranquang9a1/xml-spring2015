@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<stories xmlns ="http://www.fpt.edu.vn"
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xsi:schemaLocation="http://www.fpt.edu.vn mangaSchema.xsd">
+    <story>
+        <name>My Life, My Daisy</name>
+        <author>Quang Tran</author>
+        <status>On Going</status>
+        <source>http://www.izmanga.com</source>
+        <type>Comic, Manga, Comedy, Action, Drama, Fantasy</type>
+        <image>http://izmanga.com/files/images/161264.jpg</image>
+        <description>Khi còn nhỏ, Luffy, nhân vật chính của chúng ta, ước mơ trở thành Vua Hải Tặc. Cuộc sống của cậu bé thay đổi khi cậu vô tình có được sức mạnh có thể co dãn như cao su, nhưng đổi lại, cậu không bao giờ có thể bơi được nữa. Giờ đây, Luffy cùng những người bạn hải tặc của mình ra khơi tìm kiếm kho báu One Piece, kho báu vĩ đại nhất trên thế giới</description>
+        <newest_chap>Chap 14</newest_chap>
+        <update_date>1422371650</update_date>
+        <chapters>
+            <chapter>
+                <name>Chapter 14</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 13</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 12</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+        </chapters>
+        
+    </story>
+    <story>
+        <name>My Life, My Daisy</name>
+        <author>Quang Tran</author>
+        <status>On Going</status>
+        <source>http://www.izmanga.com</source>
+        <type>Comic, Manga, Comedy, Action, Drama, Fantasy</type>
+        <image>http://izmanga.com/files/images/161264.jpg</image>
+        <description>Khi còn nhỏ, Luffy, nhân vật chính của chúng ta, ước mơ trở thành Vua Hải Tặc. Cuộc sống của cậu bé thay đổi khi cậu vô tình có được sức mạnh có thể co dãn như cao su, nhưng đổi lại, cậu không bao giờ có thể bơi được nữa. Giờ đây, Luffy cùng những người bạn hải tặc của mình ra khơi tìm kiếm kho báu One Piece, kho báu vĩ đại nhất trên thế giới</description>
+        <newest_chap>Chap 14</newest_chap>
+        <update_date>1422371650</update_date>
+        <chapters>
+            <chapter>
+                <name>Chapter 14</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 13</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 12</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+        </chapters>
+        
+    </story>
+    <story>
+        <name>My Life, My Daisy</name>
+        <author>Quang Tran</author>
+        <status>On Going</status>
+        <source>http://www.izmanga.com</source>
+        <type>Comic, Manga, Comedy, Action, Drama, Fantasy</type>
+        <image>http://izmanga.com/files/images/161264.jpg</image>
+        <description>Khi còn nhỏ, Luffy, nhân vật chính của chúng ta, ước mơ trở thành Vua Hải Tặc. Cuộc sống của cậu bé thay đổi khi cậu vô tình có được sức mạnh có thể co dãn như cao su, nhưng đổi lại, cậu không bao giờ có thể bơi được nữa. Giờ đây, Luffy cùng những người bạn hải tặc của mình ra khơi tìm kiếm kho báu One Piece, kho báu vĩ đại nhất trên thế giới</description>
+        <newest_chap>Chap 14</newest_chap>
+        <update_date>1422371650</update_date>
+        <chapters>
+            <chapter>
+                <name>Chapter 14</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 13</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+            <chapter>
+                <name>Chapter 12</name>
+                <data>http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg|http://izmanga.com/files/images/161264.jpg</data>
+            </chapter>
+        </chapters>
+        
+    </story>
+    
+</stories>
