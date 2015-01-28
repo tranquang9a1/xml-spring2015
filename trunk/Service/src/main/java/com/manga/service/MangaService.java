@@ -1,13 +1,11 @@
 package com.manga.service;
 
 import com.manga.dao.impl.MangaDaoImpl;
-import com.manga.domain.Chapter;
-import com.manga.domain.Manga;
-import com.manga.domain.Mangas;
+import com.manga.domain.Story;
+import com.manga.dto.Stories;
+import com.manga.util.DomainToDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +23,13 @@ public class MangaService {
     MangaDaoImpl mangaDao;
 
     @RequestMapping(value = "/all",method = RequestMethod.GET )
-    public @ResponseBody Mangas getAllManga() {
-       List<Manga> mangaList = mangaDao.findAll();
-        Mangas mangas = new Mangas();
-        mangas.setManga(mangaList);
-       return  mangas;
+    public @ResponseBody
+    Stories getAllManga() {
+       List<Story> storyList = mangaDao.findAll();
+        Stories stories = new Stories();
+        for (int i = 0; i < storyList.size(); i++) {
+            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
+        }
+       return  stories;
     }
 }

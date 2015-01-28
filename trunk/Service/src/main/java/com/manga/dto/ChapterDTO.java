@@ -1,15 +1,22 @@
-package com.manga.domain;
+package com.manga.dto;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by khangtnse60992 on 1/24/2015.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "chapter", propOrder = {
+        "name",
+        "data"
+})
 
-
-public class Chapter {
+public class ChapterDTO {
 
     private String name;
+
     private String data;
 
     public String getName() {
