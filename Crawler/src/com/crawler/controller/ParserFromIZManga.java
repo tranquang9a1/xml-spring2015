@@ -113,7 +113,6 @@ public class ParserFromIZManga {
             String href = chapter_list.get(j).getElementsByTag("a").attr("href");
             int id = Integer.parseInt(href.substring(href.indexOf(story.get(i)) + story.get(i).length() + 1));
             data = getImageFromChapterIZManga(id);
-
             unsort.put(chapter, data);
         }
         Map<String, String> result = new TreeMap<String, String>(unsort);
