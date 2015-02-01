@@ -20,14 +20,29 @@ public class Story {
     private String author;
     private String status;
     private String source;
+    private String image;
+    private String desciption;
     private Long update_date;
     private String newest_chap;
     private List<String> type;
     private List<Chapter> chapters;
 
 
+    public String getImage() {
+        return image;
+    }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
 
+    public String getDesciption() {
+        return desciption;
+    }
+
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
+    }
 
     public String getId() {
         return id;
