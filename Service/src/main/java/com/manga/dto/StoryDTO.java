@@ -17,9 +17,11 @@ import java.util.List;
         "author",
         "status",
         "source",
-        "update_date",
-        "newest_chap",
         "type",
+        "image",
+        "description",
+        "newest_chap",
+        "update_date",
         "chapters"
 })
 
@@ -32,6 +34,8 @@ public class StoryDTO {
     private String author;
     private String status;
     private String source;
+    private String image;
+    private String description;
     private Long update_date;
     private String newest_chap;
     private List<String> type;
@@ -110,6 +114,22 @@ public class StoryDTO {
     //@XmlElement(required = true)
     public void setType(List<String> type) {
         this.type = type;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
