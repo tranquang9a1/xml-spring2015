@@ -6,6 +6,7 @@ package com.crawler.dao;
 
 import com.crawler.entity.Story;
 import com.crawler.xml.DomConvert;
+import com.crawler.xml.JAXBValidate;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -45,9 +46,9 @@ public class StoryDAO {
         DBCollection collection = null;
         try {
             collection = getCollection("xml", "story");
-            
+
             // Create object story to insert DB
-            
+
             BasicDBObject story = new BasicDBObject();
             story.put("name", title);
             story.put("author", author);
@@ -68,20 +69,24 @@ public class StoryDAO {
                 chapter.put("data", entry.getValue());
                 listchapter.add(chapter);
                 newest_chap = entry.getKey();
-                
+
             }
             story.put("chapters", listchapter);
             story.put("newest_chap", newest_chap);
-            story.put("update_date", System.currentTimeMillis()/1000);
+            story.put("update_date", System.currentTimeMillis() / 1000);
             // End create object Story
             // Start insert DB
             // Create XML file 
             DomConvert domConvert = new DomConvert();
             domConvert.convertXML(DomConvert.ObjectToStoryType(title, author, status, source, type, image, description, result));
-            collection.insert(story);
-            
+            if (JAXBValidate.validateSchema() == true) {
+                collection.insert(story);
+            } else {
+                return false;
+            }
+
             // End insert DB
-            
+
             System.out.println("Insert successful " + title + " with " + result.size() + " chapters!");
             return true;
         } catch (Exception e) {
@@ -89,7 +94,7 @@ public class StoryDAO {
             return false;
         }
     }
-    
+
     public boolean updateStory(String title, String author, String status,
             String source, String type, String image,
             String description, Map<String, String> result) {
@@ -98,14 +103,14 @@ public class StoryDAO {
             collection = getCollection("xml", "story");
             BasicDBObject story = new BasicDBObject();
             story.put("name", title);
-            
+
             BasicDBObject updateStory = new BasicDBObject();
-            
+
             updateStory.put("author", author);
             updateStory.put("status", status);
             updateStory.put("image", image);
             BasicDBList listchapter = new BasicDBList();
-            String newest_chap ="";
+            String newest_chap = "";
             for (Map.Entry<String, String> entry : result.entrySet()) {
                 BasicDBObject chapter = new BasicDBObject();
                 chapter.put("name", entry.getKey());
@@ -115,14 +120,14 @@ public class StoryDAO {
                 collection.update(story, updateChapter);
                 newest_chap = entry.getKey();
             }
-            
+
             updateStory.put("newest_chap", newest_chap);
             updateStory.put("update_date", System.currentTimeMillis());
-            
-            
+
+
             DBObject updateInfo = new BasicDBObject("$set", updateStory);
             collection.update(story, updateInfo);
-            
+
             System.out.println("Update successful " + title + " with " + result.size() + " chapters!");
             return true;
         } catch (Exception e) {
