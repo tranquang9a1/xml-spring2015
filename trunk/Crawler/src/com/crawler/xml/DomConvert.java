@@ -75,6 +75,8 @@ public class DomConvert {
             Document doc = builder.newDocument();
             Element root = doc.createElement("stories");
             doc.appendChild(root);
+            Element story = doc.createElement("story");
+            root.appendChild(story);
             Element name = doc.createElement("name");
             Element author = doc.createElement("author");
             Element status = doc.createElement("status");
@@ -88,16 +90,16 @@ public class DomConvert {
             updateDate.setTextContent(String.valueOf(manga.getUpdateDate()));
             newestChap.setTextContent(manga.getNewestChap());
             Element chapters = doc.createElement("chapters");
-            root.appendChild(name);
-            root.appendChild(author);
-            root.appendChild(status);
-            root.appendChild(source);
-            root.appendChild(updateDate);
-            root.appendChild(newestChap);
+            story.appendChild(name);
+            story.appendChild(author);
+            story.appendChild(status);
+            story.appendChild(source);
+            story.appendChild(updateDate);
+            story.appendChild(newestChap);
             for (int i = 0; i < manga.getType().size(); i++) {
                 Element type = doc.createElement("type");
                 type.setTextContent(manga.getType().get(i));
-                root.appendChild(type);
+                story.appendChild(type);
             }
             for (int i = 0; i < manga.getChapters().getChapter().size(); i++) {
                 Element chapter = doc.createElement("chapter");
@@ -109,7 +111,7 @@ public class DomConvert {
                 chapter.appendChild(image);
                 chapters.appendChild(chapter);
             }
-            root.appendChild(chapters);
+            story.appendChild(chapters);
             TransformerFactory transform = TransformerFactory.newInstance();
             Transformer trans = transform.newTransformer();
             trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");

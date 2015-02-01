@@ -14,6 +14,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import org.xml.sax.SAXException;
+import stories.Stories;
 
 /**
  *
@@ -21,20 +22,23 @@ import org.xml.sax.SAXException;
  */
 public class JAXBValidate {
 
-    public boolean validateSchema() {
+    public static boolean validateSchema() {
         try {
-            JAXBContext jc = JAXBContext.newInstance("org.netbean._2001.xmlschema");
+            JAXBContext jc = JAXBContext.newInstance("stories");
             Unmarshaller u = jc.createUnmarshaller();
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = sf.newSchema(new File("src/java/JAXB/persons.xsd"));
+            Schema schema = sf.newSchema(new File("src/com/crawler/xml/mangaSchema.xsd"));
             u.setSchema(schema);
-            File f = new File("persons.xml");
+            File f = new File("story.xml");
+            Stories unmarshal = (Stories) u.unmarshal(f);
         } catch (JAXBException ex) {
             Logger.getLogger(JAXBValidate.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (SAXException ex) {
             Logger.getLogger(JAXBValidate.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return false;
+        return true;
 
     }
 }
