@@ -46,7 +46,19 @@ public class StoryService {
 
     @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByName", method = RequestMethod.GET)
     public @ResponseBody Stories getByName(@RequestParam("name") String name) {
-        List<Story> storyList = storyDAO.getByName(name, 3, 0);
+        name = name.toLowerCase();
+        List<Story> storyList = storyDAO.getByName(name, 10, 0);
+        Stories stories = new Stories();
+        for (int i = 0; i < storyList.size(); i++) {
+            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
+        }
+        return  stories;
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByType", method = RequestMethod.GET)
+    public @ResponseBody Stories getByType(@RequestParam("name") String type) {
+        type = type.toLowerCase();
+        List<Story> storyList = storyDAO.getByType(type, 3, 0);
         Stories stories = new Stories();
         for (int i = 0; i < storyList.size(); i++) {
             stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
