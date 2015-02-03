@@ -21,7 +21,7 @@ public class Story {
     private String status;
     private String source;
     private String image;
-    private String desciption;
+    private String description;
     private Long update_date;
     private String newest_chap;
     private List<String> type;
@@ -36,12 +36,12 @@ public class Story {
         this.image = image;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getId() {
