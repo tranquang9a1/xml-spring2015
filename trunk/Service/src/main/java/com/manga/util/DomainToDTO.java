@@ -29,7 +29,7 @@ public class DomainToDTO {
         dto.setAuthor(story.getAuthor());
         dto.setId(story.getId());
         dto.setListChapter(chapters);
-        dto.setDescription(story.getDesciption());
+        dto.setDescription(story.getDescription());
         dto.setImage(story.getImage());
         dto.setNewest_chap(story.getNewest_chap());
         dto.setSource(story.getSource());
