@@ -3,6 +3,7 @@ package com.manga.dao.impl;
 import com.manga.dao.BaseDao;
 import com.manga.dao.StoryDao;
 import com.manga.domain.Story;
+import com.mongodb.BasicDBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -62,6 +63,50 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         query.limit(limit);
         query.skip(offset);
         result = mongoTemplate.find(query, Story.class);
+        return result;
+    }
+
+    @Override
+    public List<Story> getIzManga(int limit, int offset) {
+        List<Story> result = new ArrayList<Story>();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("source").is("http://www.izmanga.com"));
+        query.limit(limit);
+        query.skip(offset);
+        result = mongoTemplate.find(query, Story.class);
+        return result;
+    }
+
+    @Override
+    public List<Story> getKissManga(int limit, int offset) {
+        List<Story> result = new ArrayList<Story>();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("source").is("http://kissmanga.com"));
+        query.limit(limit);
+        query.skip(offset);
+        result = mongoTemplate.find(query, Story.class);
+        return result;
+    }
+
+    @Override
+    public List<Story> getMangaHead(int limit, int offset) {
+        List<Story> result = new ArrayList<Story>();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("source").is("http://www.mangahead.com"));
+        query.limit(limit);
+        query.skip(offset);
+        result = mongoTemplate.find(query, Story.class);
+        return result;
+    }
+
+    @Override
+    public Story getStory(int id) {
+        Story result = new Story();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(id));
+        BasicDBObject object =new BasicDBObject();
+        object.append("id", id);
+        result = mongoTemplate.findById(object, Story.class);
         return result;
     }
 }

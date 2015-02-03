@@ -21,8 +21,8 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-          //ParserFromMangaHead.getStoriesMangaHead();
-        //ParserFromKissManga.getStoriesKissManga();
+        ParserFromMangaHead.getStoriesMangaHead();
+        ParserFromKissManga.getStoriesKissManga();
         ParserFromIZManga.getStoriesIZManga();
 
     }

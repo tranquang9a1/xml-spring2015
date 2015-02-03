@@ -54,12 +54,13 @@ public class DomConvert {
         Chapter chapter = new Chapter();
         for (Map.Entry<String, String> entry : result.entrySet()) {
 //                BasicDBObject chapter = new BasicDBObject();
-                System.out.println("Log Name Chapter :" + entry.getKey() );
+                //System.out.println("Log Name Chapter :" + entry.getKey() );
                 chapterType.setName(entry.getKey());
                 chapterType.setData(entry.getValue());
                 chapter.getChapter().add(chapterType);
-                newest_chap = entry.getKey();
+                //newest_chap = entry.getKey();
             }
+        newest_chap = result.keySet().toArray()[0].toString();
         storyType.setChapters(chapter);
         storyType.setNewestChap(newest_chap);
         storyType.setUpdateDate(System.currentTimeMillis()/1000);

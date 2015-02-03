@@ -48,7 +48,6 @@ public class StoryDAO {
             collection = getCollection("xml", "story");
 
             // Create object story to insert DB
-
             BasicDBObject story = new BasicDBObject();
             story.put("name", title);
             story.put("author", author);
@@ -68,9 +67,10 @@ public class StoryDAO {
                 chapter.put("name", entry.getKey());
                 chapter.put("data", entry.getValue());
                 listchapter.add(chapter);
-                newest_chap = entry.getKey();
+                // newest_chap = entry.getKey();
 
             }
+            newest_chap = result.keySet().toArray()[0].toString();
             story.put("chapters", listchapter);
             story.put("newest_chap", newest_chap);
             story.put("update_date", System.currentTimeMillis() / 1000);
@@ -85,7 +85,7 @@ public class StoryDAO {
             } else {
                 return false;
             }
-
+            //collection.insert(story);
             // End insert DB
 
             System.out.println("Insert successful " + title + " with " + result.size() + " chapters!");
@@ -123,8 +123,7 @@ public class StoryDAO {
             }
 
             updateStory.put("newest_chap", newest_chap);
-            updateStory.put("update_date", System.currentTimeMillis());
-
+            updateStory.put("update_date", System.currentTimeMillis() / 1000);
 
             DBObject updateInfo = new BasicDBObject("$set", updateStory);
             collection.update(story, updateInfo);

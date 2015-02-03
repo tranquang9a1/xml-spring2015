@@ -12,4 +12,9 @@ public interface StoryDao {
     public List<Story> getNewUpdate(int limit, int offset) ;
     public List<Story> getByName(String name, int limit, int offset);
     public List<Story> getByType(String type, int limit, int offset);
+    public List<Story> getIzManga(int limit, int offset);
+    public List<Story> getKissManga(int limit, int offset);
+    public List<Story> getMangaHead(int limit, int offset);
+    public Story getStory(int id);
+
 }
