@@ -56,8 +56,8 @@ public class StoryService {
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByType", method = RequestMethod.GET)
-    public @ResponseBody Stories getByType(@RequestParam("name") String type) {
-        type = type.toLowerCase();
+    public @ResponseBody Stories getByType(@RequestParam("type") String type) {
+
         List<Story> storyList = storyDAO.getByType(type, 3, 0);
         Stories stories = new Stories();
         for (int i = 0; i < storyList.size(); i++) {

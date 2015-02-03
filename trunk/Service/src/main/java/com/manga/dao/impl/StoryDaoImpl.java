@@ -48,7 +48,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
     public List<Story> getByType(String type, int limit, int offset) {
         List<Story> result = new ArrayList<Story>();
         Query query = new Query();
-        query.addCriteria(Criteria.where("type").regex(type));
+        query.addCriteria(Criteria.where("type").in(type));
         query.limit(limit);
         query.skip(offset);
         result = mongoTemplate.find(query, Story.class);
