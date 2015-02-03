@@ -79,7 +79,10 @@ public class ParserFromIZManga {
                 description = info_content.get(0).text().trim();
                 description = description.substring(description.indexOf(": ") + 2).trim();
                 source = "http://www.izmanga.com";
-                image = source + info_pic.get(0).getElementsByTag("img").get(0).attr("src");
+                image = info_pic.get(0).getElementsByTag("img").get(0).attr("src");
+                if (!image.startsWith("http")) {
+                    image = source + image;
+                }
                 type = info.get(7).getElementsByTag("a").text().replace(" ", ",");
 
                 DBCursor cursor = dao.checkNewestChap(title.trim());
