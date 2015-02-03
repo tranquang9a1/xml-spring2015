@@ -4,6 +4,7 @@ import com.manga.dao.impl.StoryDaoImpl;
 import com.manga.domain.Story;
 import com.manga.dto.Stories;
 import com.manga.util.DomainToDTO;
+import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -28,41 +29,59 @@ public class StoryService {
     public @ResponseBody
     Stories getAllStory(@RequestParam("limit") int limit, @RequestParam("offset") int offset) {
        List<Story> storyList = storyDAO.getAllStory(limit, offset);
-        Stories stories = new Stories();
-        for (int i = 0; i < storyList.size(); i++) {
-            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
-        }
-       return  stories;
+        return DomainToDTO.convertFromList(storyList);
     }
     @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/update", method = RequestMethod.GET)
-    public @ResponseBody Stories getNewUpdate() {
-        List<Story> storyList = storyDAO.getNewUpdate(3,0);
-        Stories stories = new Stories();
-        for (int i = 0; i < storyList.size(); i++) {
-            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
-        }
-        return  stories;
+    public @ResponseBody Stories getNewUpdate(@RequestParam("limit") int limit,
+                                              @RequestParam("offset") int offset) {
+        List<Story> storyList = storyDAO.getNewUpdate(limit, offset);
+        return DomainToDTO.convertFromList(storyList);
+
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByName", method = RequestMethod.GET)
-    public @ResponseBody Stories getByName(@RequestParam("name") String name) {
+    public @ResponseBody Stories getByName(@RequestParam("name") String name, @RequestParam("limit") int limit,
+                                           @RequestParam("offset") int offset) {
         name = name.toLowerCase();
-        List<Story> storyList = storyDAO.getByName(name, 10, 0);
-        Stories stories = new Stories();
-        for (int i = 0; i < storyList.size(); i++) {
-            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
-        }
-        return  stories;
+        List<Story> storyList = storyDAO.getByName(name, limit, offset);
+        return DomainToDTO.convertFromList(storyList);
     }
 
     @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByType", method = RequestMethod.GET)
-    public @ResponseBody Stories getByType(@RequestParam("type") String type) {
+    public @ResponseBody Stories getByType(@RequestParam("type") String type, @RequestParam("limit") int limit,
+                                           @RequestParam("offset") int offset) {
 
-        List<Story> storyList = storyDAO.getByType(type, 3, 0);
+        List<Story> storyList = storyDAO.getByType(type, limit, offset);
+
+        return DomainToDTO.convertFromList(storyList);
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getIzManga", method = RequestMethod.GET)
+    public @ResponseBody Stories getIzManga(@RequestParam("limit") int limit,
+                                            @RequestParam("offset") int offset) {
+        List<Story> storyList = storyDAO.getIzManga(limit, offset);
+        return DomainToDTO.convertFromList(storyList);
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getKissManga", method = RequestMethod.GET)
+    public @ResponseBody Stories getKissManga(@RequestParam("limit") int limit,
+                                              @RequestParam("offset") int offset) {
+        List<Story> storyList = storyDAO.getKissManga(limit, offset);
+        return DomainToDTO.convertFromList(storyList);
+    }
+
+    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getMangaHead", method = RequestMethod.GET)
+    public @ResponseBody Stories getMangaHead(@RequestParam("limit") int limit,
+                                              @RequestParam("offset") int offset) {
+        List<Story> storyList = storyDAO.getMangaHead(limit, offset);
+        return DomainToDTO.convertFromList(storyList);
+    }
+
+    @RequestMapping(value = "/getStory", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public @ResponseBody Stories getStory(@RequestParam("id") int id) {
+        Story story = storyDAO.getStory(id);
         Stories stories = new Stories();
-        for (int i = 0; i < storyList.size(); i++) {
-            stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(storyList.get(i)));
-        }
-        return  stories;
+        stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(story));
+        return stories;
     }
 }

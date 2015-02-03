@@ -5,6 +5,7 @@ import com.manga.domain.Chapter;
 import com.manga.domain.Story;
 import com.manga.dto.ChapterDTO;
 import com.manga.dto.Chapters;
+import com.manga.dto.Stories;
 import com.manga.dto.StoryDTO;
 
 import java.util.ArrayList;
@@ -45,6 +46,15 @@ public class DomainToDTO {
         chapters.setName(chapter.getName());
         chapters.setData(chapter.getData());
         return chapters;
+    }
+
+
+    public static Stories convertFromList(List<Story> storyList) {
+        Stories stories = new Stories();
+        for (int i = 0; i < storyList.size(); i++) {
+            stories.getStoryDTO().add(convertToStoryDTO(storyList.get(i)));
+        }
+        return stories;
     }
 
 

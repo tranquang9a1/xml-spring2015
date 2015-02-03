@@ -11,6 +11,7 @@ import com.mongodb.DBCursor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.jsoup.Jsoup;
@@ -63,16 +64,16 @@ public class ParserFromMangaHead {
             String description = "";
             String updating = "Đang cập nhật..";
             String chapter = "";
-            for (int i = href.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < href.size(); i++) {
                 author = status = type = thumb = description = updating;
-                source = "mangahead.com";
+                source = "http://mangahead.com";
 
                 String homelink = "http://mangahead.com" + href.get(i);
                 Document linkget = Jsoup.connect(homelink).timeout(60 * 1000).get();
                 Elements images = linkget.getElementsByClass("mangahead_thumbnail_cell");
                 Elements info = linkget.getElementsByClass("mangaviewer_toppest_navig").get(0).getElementsByTag("a");
-                title = info.get(2).text().trim();
-                System.out.println(title);
+                title = info.get(2).text().trim() + " Raw";
+                //System.out.println(title);
                 chapter = linkget.getElementsByClass("mangaviewer_toppest_navig").get(0).text();
                 chapter = chapter.substring(chapter.lastIndexOf("/") + 2).trim();
                 String data = "";
@@ -83,7 +84,7 @@ public class ParserFromMangaHead {
                 DBCursor cursor = dao.checkNewestChap(title.trim());
                 // 32000 khang
                 String newest_chap = "";
-                Map<String, String> result = new HashMap<>();
+                Map<String, String> result = new LinkedHashMap<>();
                 if (cursor != null) {
                     newest_chap = (String) cursor.next().get("newest_chap");
                 }

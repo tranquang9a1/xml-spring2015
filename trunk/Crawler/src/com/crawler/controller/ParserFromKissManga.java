@@ -11,6 +11,7 @@ import com.mongodb.DBCursor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.jsoup.Jsoup;
@@ -85,7 +86,7 @@ public class ParserFromKissManga {
                 }
                 status = status.substring(0, status.indexOf("Views")).trim();
                 int start = status.indexOf("Status:");
-                status = status.substring(start + 8);
+                status = status.substring(start + 8).trim();
 
                 System.out.println(title + " - " + image + " - " + type + " - " + author + " - " + status + " - " + description);
                 Elements chapter_list = linkget.getElementsByClass("listing");
@@ -93,7 +94,7 @@ public class ParserFromKissManga {
 
                 DBCursor cursor = dao.checkNewestChap(title.trim());
                 String newest_chap = "";
-                Map<String, String> result = new HashMap<>();
+                Map<String, String> result = new LinkedHashMap<>();
                 if (cursor != null) {
                     newest_chap = (String) cursor.next().get("newest_chap");
                 }
@@ -111,14 +112,18 @@ public class ParserFromKissManga {
     }
 
     public static Map<String, String> getDataKissManga(Elements chapter) {
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> result = new LinkedHashMap<>();
         String chapter_name = "";
         String link = "";
         String data = "";
+        String source = "http://kissmanga.com";
         for (int i = 0; i < chapter.size(); i++) {
             chapter_name = chapter.get(i).text();
             link = chapter.get(i).attr("href");
             data = getImageFromChapterKissManga(link);
+            if (!data.startsWith("http")) {
+                data = source + data;
+            }
             result.put(chapter_name, data);
 
         }
