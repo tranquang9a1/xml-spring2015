@@ -60,7 +60,7 @@ public class ParserFromKissManga {
             String title = "";
             String author = "";
             String status = "";
-            String source = "http://kissmanga.com";
+            String source = "http://www.kissmanga.com";
             String type = "";
             String image = "";
             String chapter_name = "";
@@ -84,6 +84,7 @@ public class ParserFromKissManga {
                     status = info.get(2).text();
                     description = info.get(4).text();
                 }
+                title = title + " - " + source.substring(11);
                 status = status.substring(0, status.indexOf("Views")).trim();
                 int start = status.indexOf("Status:");
                 status = status.substring(start + 8).trim();
@@ -98,7 +99,7 @@ public class ParserFromKissManga {
                 if (cursor != null) {
                     newest_chap = (String) cursor.next().get("newest_chap");
                 }
-                result = getDataKissManga(chapter);
+                result = getDataKissManga(chapter, newest_chap);
                 //System.out.println(title + " - " + image + " - " + author + " - " + status + " - " + source + " - " + type);
                 if (newest_chap == null || newest_chap.isEmpty()) {
                     dao.insertStory(title, author, status, source, type, image, description, result);
@@ -111,7 +112,7 @@ public class ParserFromKissManga {
         }
     }
 
-    public static Map<String, String> getDataKissManga(Elements chapter) {
+    public static Map<String, String> getDataKissManga(Elements chapter, String newest_chap) {
         Map<String, String> result = new LinkedHashMap<>();
         String chapter_name = "";
         String link = "";
@@ -119,9 +120,12 @@ public class ParserFromKissManga {
         String source = "http://kissmanga.com";
         for (int i = 0; i < chapter.size(); i++) {
             chapter_name = chapter.get(i).text();
+            if (chapter_name.equalsIgnoreCase(newest_chap)) {
+                break;
+            }
             link = chapter.get(i).attr("href");
             data = getImageFromChapterKissManga(link);
-            if (!data.startsWith("http")) {
+            if (data != null && !data.startsWith("http")) {
                 data = source + data;
             }
             result.put(chapter_name, data);

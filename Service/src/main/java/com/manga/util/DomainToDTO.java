@@ -57,6 +57,12 @@ public class DomainToDTO {
         return stories;
     }
 
+    public static Stories convertFromObject(Story story) {
+        Stories stories = new Stories();
+        stories.getStoryDTO().add(convertToStoryDTO(story));
+        return stories;
+    }
+
 
 
 }

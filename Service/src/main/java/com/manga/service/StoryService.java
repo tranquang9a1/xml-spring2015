@@ -4,6 +4,7 @@ import com.manga.dao.impl.StoryDaoImpl;
 import com.manga.domain.Story;
 import com.manga.dto.Stories;
 import com.manga.util.DomainToDTO;
+import com.manga.util.RemoveUTF8;
 import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -22,6 +26,7 @@ import java.util.List;
 @RequestMapping("/")
 public class StoryService {
 
+    public static final String APPLICATION_XML_VALUE = MediaType.APPLICATION_XML_VALUE;
     @Autowired
     StoryDaoImpl storyDAO;
 
@@ -39,15 +44,16 @@ public class StoryService {
 
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByName", method = RequestMethod.GET)
+    @RequestMapping(produces = APPLICATION_XML_VALUE, value="/getByName", method = RequestMethod.GET)
     public @ResponseBody Stories getByName(@RequestParam("name") String name, @RequestParam("limit") int limit,
                                            @RequestParam("offset") int offset) {
-        name = name.toLowerCase();
-        List<Story> storyList = storyDAO.getByName(name, limit, offset);
+
+        String search = RemoveUTF8.removeAccent(name.toLowerCase());
+        List<Story> storyList = storyDAO.getByName(search, limit, offset);
         return DomainToDTO.convertFromList(storyList);
     }
 
-    @RequestMapping(produces = MediaType.APPLICATION_XML_VALUE, value="/getByType", method = RequestMethod.GET)
+    @RequestMapping(produces = APPLICATION_XML_VALUE, value="/getByType", method = RequestMethod.GET)
     public @ResponseBody Stories getByType(@RequestParam("type") String type, @RequestParam("limit") int limit,
                                            @RequestParam("offset") int offset) {
 
@@ -78,10 +84,9 @@ public class StoryService {
     }
 
     @RequestMapping(value = "/getStory", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
-    public @ResponseBody Stories getStory(@RequestParam("id") int id) {
-        Story story = storyDAO.getStory(id);
-        Stories stories = new Stories();
-        stories.getStoryDTO().add(DomainToDTO.convertToStoryDTO(story));
-        return stories;
+    public @ResponseBody Stories getStory(@RequestParam("name") String name) {
+        name = RemoveUTF8.removeAccent(name.toLowerCase());
+        Story story = storyDAO.getStory(name);
+        return DomainToDTO.convertFromObject(story);
     }
 }

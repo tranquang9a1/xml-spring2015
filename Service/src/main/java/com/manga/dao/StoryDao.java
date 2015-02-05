@@ -15,6 +15,6 @@ public interface StoryDao {
     public List<Story> getIzManga(int limit, int offset);
     public List<Story> getKissManga(int limit, int offset);
     public List<Story> getMangaHead(int limit, int offset);
-    public Story getStory(int id);
+    public Story getStory(String name);
 
 }

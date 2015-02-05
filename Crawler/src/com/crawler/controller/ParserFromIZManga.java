@@ -72,14 +72,15 @@ public class ParserFromIZManga {
                 Elements info_pic = linkget.getElementsByClass("manga-info-pic");
                 Elements info_content = linkget.getElementsByClass("manga-info-content");
                 Elements info = info_topic.get(0).getElementsByTag("li");
+                source = "http://www.izmanga.com";
                 title = info.get(0).getElementsByTag("h1").text();
+                title = title + " - " + source.substring(11);
                 author = info.get(1).text();
                 author = author.substring(author.indexOf(": ") + 2).trim();
                 status = info.get(2).text();
                 status = status.substring(status.indexOf(": ") + 2).trim();
                 description = info_content.get(0).text().trim();
                 description = description.substring(description.indexOf(": ") + 2).trim();
-                source = "http://www.izmanga.com";
                 image = info_pic.get(0).getElementsByTag("img").get(0).attr("src");
                 if (!image.startsWith("http")) {
                     image = source + image;
