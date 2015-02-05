@@ -50,6 +50,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         List<Story> result = new ArrayList<Story>();
         Query query = new Query();
         query.addCriteria(Criteria.where("type").in(type));
+        query.with(new Sort(Sort.Direction.DESC, "update_time"));
         query.limit(limit);
         query.skip(offset);
         result = mongoTemplate.find(query, Story.class);
@@ -62,6 +63,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         Query query = new Query();
         query.limit(limit);
         query.skip(offset);
+        query.with(new Sort(Sort.Direction.DESC, "update_time"));
         result = mongoTemplate.find(query, Story.class);
         return result;
     }
@@ -73,6 +75,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         query.addCriteria(Criteria.where("source").is("http://www.izmanga.com"));
         query.limit(limit);
         query.skip(offset);
+        query.with(new Sort(Sort.Direction.DESC, "update_time"));
         result = mongoTemplate.find(query, Story.class);
         return result;
     }
@@ -84,6 +87,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         query.addCriteria(Criteria.where("source").is("http://kissmanga.com"));
         query.limit(limit);
         query.skip(offset);
+        query.with(new Sort(Sort.Direction.DESC, "update_time"));
         result = mongoTemplate.find(query, Story.class);
         return result;
     }
@@ -95,18 +99,17 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
         query.addCriteria(Criteria.where("source").is("http://www.mangahead.com"));
         query.limit(limit);
         query.skip(offset);
+        query.with(new Sort(Sort.Direction.DESC, "update_time"));
         result = mongoTemplate.find(query, Story.class);
         return result;
     }
 
     @Override
-    public Story getStory(int id) {
+    public Story getStory(String name) {
         Story result = new Story();
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(id));
-        BasicDBObject object =new BasicDBObject();
-        object.append("id", id);
-        result = mongoTemplate.findById(object, Story.class);
+        query.addCriteria(Criteria.where("alias").is(name));
+        result = mongoTemplate.findOne(query, Story.class);
         return result;
     }
 }

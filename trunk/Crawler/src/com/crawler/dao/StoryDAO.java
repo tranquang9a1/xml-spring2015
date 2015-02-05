@@ -5,6 +5,7 @@
 package com.crawler.dao;
 
 import com.crawler.entity.Story;
+import com.crawler.util.Util;
 import com.crawler.xml.DomConvert;
 import com.crawler.xml.JAXBValidate;
 import com.mongodb.BasicDBList;
@@ -74,7 +75,8 @@ public class StoryDAO {
             story.put("chapters", listchapter);
             story.put("newest_chap", newest_chap);
             story.put("update_date", System.currentTimeMillis() / 1000);
-            story.put("alias", title.toLowerCase());
+            story.put("alias", Util.toUrlFriendly(title.toLowerCase()));
+            //String alias = Util.removeAccent(title.toLowerCase());
             // End create object Story
             // Start insert DB
             // Create XML file 
