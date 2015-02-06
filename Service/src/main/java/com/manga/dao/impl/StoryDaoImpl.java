@@ -84,7 +84,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
     public List<Story> getKissManga(int limit, int offset) {
         List<Story> result = new ArrayList<Story>();
         Query query = new Query();
-        query.addCriteria(Criteria.where("source").is("http://kissmanga.com"));
+        query.addCriteria(Criteria.where("source").is("http://www.kissmanga.com"));
         query.limit(limit);
         query.skip(offset);
         query.with(new Sort(Sort.Direction.DESC, "update_time"));
@@ -96,7 +96,7 @@ public class StoryDaoImpl extends BaseDao<Story,String> implements StoryDao {
     public List<Story> getMangaHead(int limit, int offset) {
         List<Story> result = new ArrayList<Story>();
         Query query = new Query();
-        query.addCriteria(Criteria.where("source").is("http://www.mangahead.com"));
+        query.addCriteria(Criteria.where("source").is("http://mangahead.com"));
         query.limit(limit);
         query.skip(offset);
         query.with(new Sort(Sort.Direction.DESC, "update_time"));
