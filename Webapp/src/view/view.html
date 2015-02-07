@@ -1,0 +1,191 @@
+
+
+    <style type="text/css">
+        #content {
+            width: 100%;
+            border: 1px solid #DDD;
+            margin-top: 5px;
+        }
+
+        .title h2 {
+            background: #0085DC;
+            padding: 9px 10px;
+            margin: 0 -1px;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title h2 a {
+            color: #FFF;
+        }
+
+        .pagepost {
+            padding: 10px;
+            line-height: 24px;
+            padding-bottom: 0;
+        }
+
+        .cover img {
+            max-width: 650px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .down_area {
+            margin: 10px;
+        }
+
+        .down_title {
+            background: #147CE3;
+            color: #fff;
+            font-weight: 700;
+            padding: 8px 10px;
+        }
+
+        .down_box {
+            clear: both;
+        }
+
+        .down_item {
+            max-height: 350px;
+            overflow-y: scroll;
+        }
+
+        .down_item li {
+            margin: 10px;
+            margin-right: 0;
+            padding-right: 10px;
+        }
+
+        .down_item li:last-child {
+            border-right: 0;
+        }
+
+        .down_item .title-list-chapter {
+            margin-top: 2px;
+            border-bottom: 1px solid blue;
+        }
+
+        .span-chapter-name {
+            padding-left: 15px;
+        }
+
+        .span-chapter-name .a {
+            color: black;
+        }
+
+        .span-update-date {
+            float: right;
+            width: 30%;
+        }
+
+        a:link {
+            color: black;
+        }
+
+        a:visited, a:hover {
+            color: blue;
+        }
+		.info {
+			font-family: Sans-serif;
+		}
+		.info-title {
+			text-decoration: underline;
+		}
+		
+    </style>
+<div id="wrapper">
+    <div id="menujohanes">
+
+        <ul>
+            <li><a href="#" title="Home" class="title">Manga Book</a></li>
+            <li><a href="#">Vietnamese</a></li>
+            <li><a href="#">English</a></li>
+            <li><a href="#">Japanese Raw</a></li>
+            <li><a href="#">About Us</a></li>
+            <li>
+                <div class="search-form">
+                    <form action="#">
+                        <input class="text-input" name="b" type="text">
+                        <button class="submit-button" type="submit"><i class="icon-search"></i></button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="casing">
+        <div id="content">
+            <div class="main section" id="main">
+                <div class="widget Blog" id="Blog1">
+                    <div class="blog-posts">
+                        
+                        <div class="title">
+                            <a name="5197127098284532974"></a>
+
+                            <h2>
+                                <a href="./Golden Time 04 Subtitle Indonesia_files/Golden Time 04 Subtitle Indonesia.html"
+                                   rel="bookmark" title="Permanent Link to Golden Time 04 Subtitle Indonesia">{{story.name}}</a>
+                            </h2>
+                        </div>
+                        
+                        <div class="pagepost">
+                            <div class="cover">
+                                <img src="img.png" alt="description">
+								<div class= "info"> 
+								
+								<br><span class="info-title"> Tác giả</span>: <span id="author">{{story.author}}</span>
+								<br><div ng-if="story.type.length > 0"><span class="info-title"> Thể loại</span>:<span id="genre" data-ng-repeat="type in story.type">{{type}},</span></div>
+                                    <div ng-if="story.type == 'Đang cập nhật..'"> Thể loại: <span id="genre">Đang cập nhật..</span></div>
+								<br><span class="info-title"> Status</span>: <span id="status">{{story.status}}</span>
+								<br><span class="info-title"> Nguồn</span>: <span id="source">{{story.source}}</span>
+								<br> <span id="description" style="font-size: 13px;">{{story.description}}</span>
+                                </div>
+							
+
+                                <div class="down_area">
+
+                                    <div class="down_box">
+                                        <h3 class="down_title">{{story.name}}</h3>
+
+                                        <div class="title-list-chapter" style="font-weight: 600; color: blue" >
+                                            <span class="span-chapter-name">Chapter Name</span>
+                                            <span class="span-update-date">Update Date</span>
+
+                                        </div>
+
+                                        <div class="down_item" ng-if="story.chapters.chapter.length > 0">
+                                            <div class="list-chapter" data-ng-repeat="chapter in story.chapters.chapter">
+                                                <span class="span-chapter-name"><a href="#view/{{story.name}}/{{chapter.name}}">{{chapter.name}}</a></span>
+                                                <span class="span-update-date">20/01/2015</span>
+                                            </div>
+                                        </div>
+                                        <div class="down_item" ng-if="story.chapters.chapter.length == NULL">
+                                            <div class="list-chapter">
+                                                <span class="span-chapter-name"><a href="#view/{{story.name}}/{{story.chapters.chapter.name}}">{{story.chapters.chapter.name}}</a></span>
+                                                <span class="span-update-date">20/01/2015</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- Wrapper -->
+<footer id="footer">
+
+    <div class="copyright">
+        <p>- Copyright © 2015 Manga Book - Design By Group 3 -</p>
+    </div>
+    <div class="clear"></div>
+</footer>
