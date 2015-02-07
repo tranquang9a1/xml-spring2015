@@ -116,16 +116,14 @@ a img {border-width:0;}
 .search-form {
     float: left;
     line-height: 44px;
-    margin-left: 20px;
     position: relative;
-	padding-left: 70px;
 }
 .text-input {
     outline: 0;
     border: 1px solid #DDD;
     padding: 3px 5px;
     height: 18px;
-    width: 250px;
+    width: 190px;
     border-radius: 2px;
 }
 .submit-button {
