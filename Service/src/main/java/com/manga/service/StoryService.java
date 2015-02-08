@@ -8,7 +8,10 @@ import com.manga.util.DomainToDTO;
 import com.manga.util.RemoveUTF8;
 import com.sun.java.browser.plugin2.DOM;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -43,15 +47,24 @@ public class StoryService {
 
     @RequestMapping(value="/download", method = RequestMethod.GET, produces = "application/pdf")
 
-    public @ResponseBody void download(@RequestParam("story") String story, @RequestParam("chapter") String chapter,
+    public void download(@RequestParam("story") String story, @RequestParam("chapter") String chapter,
                                          HttpServletResponse response) {
         try {
             byte[] content = CreatePDF.create(story, chapter);
             response.setContentLength(content.length);
             response.getOutputStream().write(content);
             response.getOutputStream().flush();
-        } catch (IOException e) {
+            //HttpHeaders headers = new HttpHeaders();
+            //headers.setContentType(MediaType.parseMediaType("application/pdf"));
+            //String filename = "output.pdf";
+            //headers.setContentDispositionFormData(filename, filename);
+            //headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+            //return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
+
+
+        } catch (Exception e) {
             e.printStackTrace();
+            //return null;
         }
 
     }
