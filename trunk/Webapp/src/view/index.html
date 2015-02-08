@@ -43,7 +43,7 @@
                                 <img class="label_thumb" src="{{story.image}}">
                                 </div>
 								</a>
-								<a href="#view/{{story.name}}" target="_top">{{story.name}}</a>
+								<a href="#/view/{{getLink(story.name)}}" target="_top">{{story.name}}</a>
 							<br> Tác giả: <span id="author">{{story.author}}</span>
 							<br><div ng-if="story.type.length > 0"> Thể loại: <span id="genre" data-ng-repeat="type in story.type">{{type}},</span></div>
                                 <div ng-if="story.type == 'Đang cập nhật..'"> Thể loại: <span id="genre">Đang cập nhật..</span></div>
