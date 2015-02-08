@@ -25,6 +25,9 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }])
 app.controller("IndexController", function ($scope, $routeParams, StoriesFactory) {
+    $scope.getLink = function(data) {
+        return encodeURI(data);
+    }
     var page = $routeParams.page;
     $scope.stories = [];
     StoriesFactory.getStoriesRequest(null, 0).then(function (data) {
