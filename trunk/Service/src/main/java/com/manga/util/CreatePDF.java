@@ -27,12 +27,12 @@ import org.apache.fop.apps.MimeConstants;
  */
 public class CreatePDF {
 
-    public static byte[] create(String story, String chapter) {
+    public static byte[] create(String story, String chapter, String path) {
 
 
 
             try {
-                String path = "D:/XML/xml-spring2015/Service/src/main/webapp/";
+                path = "D:/XML/xml-spring2015/Service/src/main/webapp/";
                 String xslPath = path + "WEB-INF/xml/chapterFO.xsl";
                 String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + story;
                 String foPath = path + "WEB-INF/xml/chapterFO.fo";
@@ -41,8 +41,6 @@ public class CreatePDF {
                 FileInputStream input = new FileInputStream(file);
 
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
-
-
 
                 FopFactory ff = FopFactory.newInstance();
                 FOUserAgent userAgent = ff.newFOUserAgent();

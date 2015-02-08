@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.Response;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,28 +46,39 @@ public class StoryService {
         return "hello";
     }
 
-    @RequestMapping(value="/download", method = RequestMethod.GET, produces = "application/pdf")
-
+    @RequestMapping(value="/exportPDF", method = RequestMethod.GET, produces = "application/pdf")
     public void download(@RequestParam("story") String story, @RequestParam("chapter") String chapter,
-                                         HttpServletResponse response) {
+                                         HttpServletResponse response, HttpServletRequest request) {
         try {
-            byte[] content = CreatePDF.create(story, chapter);
+            String path = request.getContextPath();
+            byte[] content = CreatePDF.create(story, chapter, path);
             response.setContentLength(content.length);
             response.getOutputStream().write(content);
             response.getOutputStream().flush();
-            //HttpHeaders headers = new HttpHeaders();
-            //headers.setContentType(MediaType.parseMediaType("application/pdf"));
-            //String filename = "output.pdf";
-            //headers.setContentDispositionFormData(filename, filename);
-            //headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-            //return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
+
 
 
         } catch (Exception e) {
             e.printStackTrace();
-            //return null;
         }
 
+    }
+
+    @RequestMapping(value="/download", method=RequestMethod.GET)
+    public String download(@RequestParam("story") String story, @RequestParam("chapter") String chapter,
+                           HttpServletRequest request, HttpServletResponse response) {
+        try {
+            HttpSession session = request.getSession();
+            session.setAttribute("story", story);
+            session.setAttribute("chapter", chapter);
+            String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + URLEncoder.encode(story, "UTF-8");
+            session.setAttribute("xmlPath", xmlPath);
+
+
+            return "download";
+        }catch (Exception ex) {
+            return null;
+        }
     }
 
     @RequestMapping(value = "/all",method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE )
