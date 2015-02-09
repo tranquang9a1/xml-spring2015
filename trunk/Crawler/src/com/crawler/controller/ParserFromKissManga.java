@@ -152,7 +152,7 @@ public class ParserFromKissManga {
                 data += img.trim() + "|";
 
             }
-            return data;
+            return data.substring(0, data.length() - 1);
 
         } catch (Exception e) {
             return null;
