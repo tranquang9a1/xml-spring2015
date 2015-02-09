@@ -16,7 +16,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'ChapterController',
             templateUrl: 'detail.html'
         })
-        .when('/:type/:page', {
+        .when('/:typeManga/:page', {
             controller: 'StoriesController',
             templateUrl: 'home.html'
         })
@@ -25,26 +25,47 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }])
 app.controller("IndexController", function ($scope, $routeParams, StoriesFactory) {
-    $scope.getLink = function(data) {
+    $scope.getLink = function (data) {
         return encodeURI(data);
     }
-    var page = $routeParams.page;
+//    var page = $routeParams.page;
     $scope.stories = [];
-    StoriesFactory.getStoriesRequest(null, 0).then(function (data) {
-        $scope.stories = data
-    });
-});
 
+    if (StoriesFactory.getStories().length == 0 || StoriesFactory.getType() != null) {
+        StoriesFactory.getStoriesRequest(null, 0).then(function (data) {
+            $scope.stories = data
+        });
+    } else {
+        $scope.stories = StoriesFactory.getStories();
+    }
+    $scope.addMore = function () {
+        var page = +StoriesFactory.getPage() + 1;
+        StoriesFactory.getStoriesRequest(null, page).then(function (data) {
+            $scope.stories = data
+        });
+    };
+});
 app.controller("StoriesController", function ($scope, $routeParams, StoriesFactory) {
-    $scope.getLink = function(data) {
+    $scope.getLink = function (data) {
         return encodeURI(data);
     }
     var page = $routeParams.page;
-    var type = $routeParams.name;
+    var type = $routeParams.typeManga;
     $scope.stories = [];
-    StoriesFactory.getStoriesRequest(type, page).then(function (data) {
-        $scope.stories = data
-    });
+    if (StoriesFactory.getStories().length == 0 || StoriesFactory.getType() != type || StoriesFactory.getType() == null) {
+        StoriesFactory.resetPage();
+        StoriesFactory.getStoriesRequest(type, page).then(function (data) {
+            $scope.stories = data
+        });
+    } else {
+        $scope.stories = StoriesFactory.getStories();
+    }
+    $scope.addMore = function () {
+        page = +StoriesFactory.getPage() + 1;
+        StoriesFactory.getStoriesRequest(type, page).then(function (data) {
+            $scope.stories = data
+        });
+    };
 });
 app.controller("ChapterController", function ($scope, $routeParams, StoriesFactory) {
     var name = $routeParams.name;
@@ -99,7 +120,6 @@ app.controller("StoryController", function ($scope, $routeParams, StoriesFactory
                 console.log(tmp[i])
                 flag = 1;
             }
-
         }
     }
 });
@@ -107,6 +127,8 @@ app.factory("StoriesFactory", function ($http) {
     var stories = [];
     var factory = {};
     var story;
+    var pageFlag;
+    var typeFlag;
     factory.getStoriesRequest = function (type, page) {
         var url = "http://lazyeng.com:8080/xmlservice/";
         var limit = 10;
@@ -116,22 +138,41 @@ app.factory("StoriesFactory", function ($http) {
                 page = 0;
             }
             url = url + "update?limit=" + limit + "&offset=" + offset;
-        } else if(type == "vn") {
+        } else if (type == "vn") {
             url = url + "getIzManga?limit=" + limit + "&offset=" + offset;
-        } else if(type == "en") {
+        } else if (type == "en") {
             url = url + "getKissManga?limit=" + limit + "&offset=" + offset;
-        } else if(type == "jp") {
+        } else if (type == "jp") {
             url = url + "getMangaHead?limit=" + limit + "&offset=" + offset;
         }
         return $http.get(url).then(function (response) {
+            console.log(response.data)
             var json = $.xml2json(response.data);
-            stories = json.story
-            console.log(stories)
-            if (stories.length == null) {
-                var tmp = "[" + JSON.stringify(stories) + "]";
-                stories = JSON.parse(tmp);
+            if (json != "") {
+                var tmp = json.story
+                console.log(stories)
+                if (tmp.length == null) {
+                    tmp = "[" + JSON.stringify(tmp) + "]";
+                    if (stories.length == 0) {
+                        stories = JSON.parse(tmp);
+                    } else {
+                        stories.push.apply(stories, tmp);
+                    }
+                } else {
+                    if (stories.length == 0 || typeFlag != type) {
+                        stories = tmp;
+                    } else {
+                        if (stories[0].name != tmp[0].name) {
+                            stories.push.apply(stories, tmp);
+                        }
+                    }
+                }
+                pageFlag = page;
+                typeFlag = type;
+                return stories;
+            } else {
+                return stories;
             }
-            return stories;
         });
         return stories;
     };
@@ -151,6 +192,14 @@ app.factory("StoriesFactory", function ($http) {
     factory.getStory = function () {
         return story;
     }
-
+    factory.getPage = function () {
+        return pageFlag;
+    }
+    factory.getType = function () {
+        return typeFlag;
+    }
+    factory.resetPage = function () {
+        pageFlag = 0;
+    }
     return factory;
 })
