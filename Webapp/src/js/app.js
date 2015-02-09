@@ -6,7 +6,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'IndexController',
-            templateUrl: 'index.html'
+            templateUrl: 'home.html'
         })
         .when('/view/:name', {
             controller: 'StoryController',
@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/:type/:page', {
             controller: 'StoriesController',
-            templateUrl: 'index.html'
+            templateUrl: 'home.html'
         })
         .otherwise({
             redirectTo: '/'
@@ -34,23 +34,26 @@ app.controller("IndexController", function ($scope, $routeParams, StoriesFactory
         $scope.stories = data
     });
 });
+
+app.controller("StoriesController", function ($scope, $routeParams, StoriesFactory) {
+    $scope.getLink = function(data) {
+        return encodeURI(data);
+    }
+    var page = $routeParams.page;
+    var type = $routeParams.name;
+    $scope.stories = [];
+    StoriesFactory.getStoriesRequest(type, page).then(function (data) {
+        $scope.stories = data
+    });
+});
 app.controller("ChapterController", function ($scope, $routeParams, StoriesFactory) {
     var name = $routeParams.name;
     var chapter = $routeParams.chapter;
-    if (StoriesFactory.getStory() == null) {
-        StoriesFactory.getStoryRequest(name).then(function (data) {
-            $scope.story = data;
-            imageProcess();
-        });
-    } else {
-        $scope.story = StoriesFactory.getStory();
-        imageProcess();
-    }
     var imageProcess = function () {
         if ($scope.story.chapters.chapter.length > 0) {
             var flag = 0;
             for (var i = 0; i < $scope.story.chapters.chapter.length && flag == 0; i++) {
-                if ($scope.story.chapters.chapter[i].name == name) {
+                if ($scope.story.chapters.chapter[i].name == chapter) {
                     $scope.chapter = $scope.story.chapters.chapter[i];
                     flag = 1;
                 }
@@ -60,7 +63,22 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
         }
         $scope.imageLinks = $scope.chapter.data.split('|');
     }
-
+    if (StoriesFactory.getStory() == null) {
+        StoriesFactory.getStoryRequest(name).then(function (data) {
+            $scope.story = data;
+            imageProcess();
+        });
+    } else {
+        $scope.story = StoriesFactory.getStory();
+        imageProcess();
+    }
+    $scope.selectChapter = function ($index) {
+        var story = StoriesFactory.getStory();
+        var name = story.name;
+        var chapter = $scope.item.name;
+        var url = window.location.protocol + window.location.host + window.location.pathname + "#/view/" + name + "/" + chapter;
+        window.open(url);
+    }
 });
 app.controller("StoryController", function ($scope, $routeParams, StoriesFactory) {
     var name = $routeParams.name;
@@ -96,6 +114,12 @@ app.factory("StoriesFactory", function ($http) {
                 page = 0;
             }
             url = url + "update?limit=" + limit + "&offset=" + offset;
+        } else if(type == "vn") {
+            url = url + "getIzManga?limit=" + limit + "&offset=" + offset;
+        } else if(type == "en") {
+            url = url + "getKissManga?limit=" + limit + "&offset=" + offset;
+        } else if(type == "jp") {
+            url = url + "getMangaHead?limit=" + limit + "&offset=" + offset;
         }
         return $http.get(url).then(function (response) {
             var json = $.xml2json(response.data);

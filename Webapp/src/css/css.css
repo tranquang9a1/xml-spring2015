@@ -28,6 +28,7 @@ nav,nav ul,nav ol,nav li,ul,li,ol{margin:0;padding:0;list-style:none}
 }
 .sidebar .widget {
     border: 1px solid #ddd;
+    overflow: hidden;
     margin-bottom: 10px;
 }
 .sidebar ul{
@@ -221,4 +222,11 @@ a img {border-width:0;}
     .footwidget {width: 230px;margin: 15px 14px 5px;}
     .footer-widget{margin-top:0;}
     .cover img {max-width: 80% !important;}
+}
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+
 }

@@ -67,6 +67,7 @@ body {background: #28282C; }
 <!-- google_ad_section_start(name=default) -->
 <div class="title">
 <a name="5197127098284532974"></a>
+<input type="hidden" id="storyName" value="{{story.name}}"/>
 <h2>
 <a href="./Golden Time 04 Subtitle Indonesia_files/Golden Time 04 Subtitle Indonesia.html" rel="bookmark" title="Permanent Link to Golden Time 04 Subtitle Indonesia">{{story.name}}</a>
 </h2>
@@ -80,12 +81,24 @@ body {background: #28282C; }
 <img src="{{image}}">
 <div style="clear: both;"></div>
 </div>
-
 </div>
 
 <!-- google_ad_section_end -->
 </div>
 
+<div>
+    <select id="chapter">
+        <option ng-option="chapter as chapter.name chapter in story.chapter.chapters" ng-model="item" ng-change="selectChapter()" >{{chapter.name}}</option>
+    </select>
+</div>
+<!--<script>-->
+    <!--function selectChapter(){-->
+        <!--var storyName = document.getElementById("storyName").value;-->
+        <!--var chapter = document.getElementById("chapter").value;-->
+        <!--var url = window.location.protocol + window.location.host + window.location.pathname + "#/view/" + storyName + "/" + chapter;-->
+        <!--window.open(url);-->
+    <!--}-->
+<!--</script>-->
 <div class="clear"></div>
 </div></div>
 </div>
