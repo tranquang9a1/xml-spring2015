@@ -33,7 +33,6 @@ public class CreatePDF {
 
 
             try {
-                path = "D:/XML/xml-spring2015/Service/src/main/webapp/";
                 String xslPath = path + "WEB-INF/xml/chapterFO.xsl";
                 String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + URLEncoder.encode(story, "UTF-8");
                 String foPath = path + "WEB-INF/xml/chapterFO.fo";
