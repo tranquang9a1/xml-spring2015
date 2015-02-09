@@ -66,6 +66,7 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
     if (StoriesFactory.getStory() == null) {
         StoriesFactory.getStoryRequest(name).then(function (data) {
             $scope.story = data;
+            $scope.item = $scope.story.chapters.chapter[0];
             imageProcess();
         });
     } else {
@@ -76,9 +77,10 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
         var story = StoriesFactory.getStory();
         var name = story.name;
         var chapter = $scope.item.name;
-        var url = window.location.protocol + window.location.host + window.location.pathname + "#/view/" + name + "/" + chapter;
+        var url = "#/view/" + name + "/" + chapter;
         window.open(url);
     }
+
 });
 app.controller("StoryController", function ($scope, $routeParams, StoriesFactory) {
     var name = $routeParams.name;
