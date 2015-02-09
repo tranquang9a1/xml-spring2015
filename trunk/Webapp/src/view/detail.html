@@ -106,7 +106,7 @@
                         <!-- google_ad_section_end -->
                     </div>
 
-                    <div>
+                    <div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
                         <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
                                 ng-model="item" ng-change="selectChapter()"></select>
                     </div>
