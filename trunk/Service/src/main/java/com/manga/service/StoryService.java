@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,9 @@ public class StoryService {
     @Autowired
     StoryDaoImpl storyDAO;
 
+    @Autowired
+    ServletContext context;
+
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String index() {
@@ -50,7 +54,7 @@ public class StoryService {
     public void download(@RequestParam("story") String story, @RequestParam("chapter") String chapter,
                                          HttpServletResponse response, HttpServletRequest request) {
         try {
-            String path = request.getContextPath();
+            String path = context.getRealPath("/");
             byte[] content = CreatePDF.create(story, chapter, path);
             response.setContentLength(content.length);
             response.getOutputStream().write(content);
