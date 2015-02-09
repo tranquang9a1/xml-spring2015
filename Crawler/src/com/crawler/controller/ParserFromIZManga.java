@@ -138,7 +138,7 @@ public class ParserFromIZManga {
             int start = image_list.get(17).data().trim().indexOf("'");
             int end = image_list.get(17).data().trim().indexOf("';");
             String data = image_list.get(17).data().trim().substring(start + 1, end);
-            return data;
+            return data + "|";
 
         } catch (Exception e) {
             e.printStackTrace();

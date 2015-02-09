@@ -18,8 +18,8 @@
             <xsl:for-each select="//chapter">
                 <xsl:if test="name = $chapter">
                     <tr>
-                        <xsl:call-template name="SplitLinks">
-                            <xsl:with-param name="pLinks" select="data"/>
+                        <xsl:call-template name="SplitString">
+                            <xsl:with-param name="String" select="data"/>
                         </xsl:call-template>
                     </tr>
                 </xsl:if>
@@ -29,49 +29,28 @@
     </xsl:template>
 
 
-    <xsl:template name="SplitLinks">
-        <xsl:param name="pLinks"/>
+    <xsl:template name="SplitString">
+        <xsl:param name="String"/>
         <!-- how many seperators are there in the string... -->
-        <xsl:variable name="vCountSeperators" select="string-length($pLinks) - string-length(translate($pLinks,'|',''))"/>
+        <xsl:variable name="countSeperators" select="string-length($String) - string-length(translate($String,'|',''))"/>
         <xsl:variable name="count" select="1"/>
         <xsl:choose>
 
-            <xsl:when test="$vCountSeperators &gt;= 1">
+            <xsl:when test="$countSeperators &gt;= 1">
               <img height="400px" width="200px">
                   <xsl:attribute name="src" >
-                      <xsl:call-template name="string-rtrim">
-                          <xsl:with-param name="string" select="substring-before($pLinks,'|')" />
-                      </xsl:call-template>
+                          <xsl:value-of select="substring-before($String,'|')" />
                   </xsl:attribute>
               </img>
 
-                <xsl:call-template name="SplitLinks">
-                    <xsl:with-param name="pLinks" select="substring-after($pLinks,'|')"/>
+                <xsl:call-template name="SplitString">
+                    <xsl:with-param name="String" select="substring-after($String,'|')"/>
                 </xsl:call-template>
             </xsl:when>
         </xsl:choose>
 
     </xsl:template>
 
-    <xsl:template name="string-rtrim">
-        <xsl:param name="string" />
-        <xsl:param name="trim" select="$whitespace" />
 
-        <xsl:variable name="length" select="string-length($string)" />
-
-        <xsl:if test="$length &gt; 0">
-            <xsl:choose>
-                <xsl:when test="contains($trim, substring($string, $length, 1))">
-                    <xsl:call-template name="string-rtrim">
-                        <xsl:with-param name="string" select="substring($string, 1, $length - 1)" />
-                        <xsl:with-param name="trim"   select="$trim" />
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$string" />
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:if>
-    </xsl:template>
 
 </xsl:stylesheet>

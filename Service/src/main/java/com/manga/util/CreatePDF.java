@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class CreatePDF {
             try {
                 path = "D:/XML/xml-spring2015/Service/src/main/webapp/";
                 String xslPath = path + "WEB-INF/xml/chapterFO.xsl";
-                String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + story;
+                String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + URLEncoder.encode(story, "UTF-8");
                 String foPath = path + "WEB-INF/xml/chapterFO.fo";
                 methodTrAX(xslPath, xmlPath, foPath, chapter, story);
                 File file = new File(foPath);
