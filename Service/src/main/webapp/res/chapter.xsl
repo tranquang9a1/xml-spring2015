@@ -11,7 +11,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="html" omit-xml-declaration="yes"/>
     <xsl:param name="chapter" select="'chapter'" />
-    <xsl:variable name="whitespace" select="'&#09;&#10;&#13;%0A '" />
+    <xsl:variable name="whitespace" select="'&#09;&#10;&#13; '" />
     <xsl:template match="/">
         <table border="1px">
 
