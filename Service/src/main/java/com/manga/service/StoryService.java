@@ -55,12 +55,12 @@ public class StoryService {
                                          HttpServletResponse response, HttpServletRequest request) {
         try {
             String path = context.getRealPath("/");
+            System.out.print(story);
             byte[] content = CreatePDF.create(story, chapter, path);
             response.setContentLength(content.length);
             response.getOutputStream().write(content);
+            response.setCharacterEncoding("UTF-8");
             response.getOutputStream().flush();
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
