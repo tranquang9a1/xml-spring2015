@@ -30,7 +30,7 @@
             </fo:layout-master-set>
             <fo:page-sequence master-reference="x">
                 <fo:static-content flow-name="xsl-region-before">
-                    <fo:block font-size="14pt" font-family="sans-serif" line-height="24pt"
+                    <fo:block font-size="14pt" font-family="Arial" line-height="24pt"
                               background-color="cyan" space-after.optimum="15pt" text-align="center"
                             >
                         Story:  <xsl:value-of select="$story" /> -  Chapter: <xsl:value-of select="$chapterName" /> - Copyright: Group 3 - XML

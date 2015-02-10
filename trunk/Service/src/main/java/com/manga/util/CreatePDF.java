@@ -33,16 +33,24 @@ public class CreatePDF {
 
 
             try {
+                System.out.println(story);
+                String foFileName = "Story-" + RemoveUTF8.removeAccent(story)+ "-Chapter-" + RemoveUTF8.removeAccent(chapter)+".fo";
                 String xslPath = path + "WEB-INF/xml/chapterFO.xsl";
                 String xmlPath = "http://lazyeng.com:8080/xmlservice/getStory?name=" + URLEncoder.encode(story, "UTF-8");
-                String foPath = path + "WEB-INF/xml/chapterFO.fo";
-                methodTrAX(xslPath, xmlPath, foPath, chapter, story);
+                String foPath = path + "WEB-INF/xml/" + foFileName;
+                String config = path + "WEB-INF/xml/FOPUserConfig.xml";
+                String font = path + "WEB-INF/xml";
                 File file = new File(foPath);
+                if (!file.exists()) {
+                    methodTrAX(xslPath, xmlPath, foPath, chapter, story);
+                }
                 FileInputStream input = new FileInputStream(file);
 
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
 
                 FopFactory ff = FopFactory.newInstance();
+                ff.setUserConfig(config);
+                ff.getFontManager().setFontBaseURL(font);
                 FOUserAgent userAgent = ff.newFOUserAgent();
 
                 Fop fop = ff.newFop(MimeConstants.MIME_PDF, userAgent, out);
@@ -71,6 +79,7 @@ public class CreatePDF {
             StreamSource xsltFile = new StreamSource(xslPath);
             Transformer transform = tf.newTransformer(xsltFile);
             transform.setParameter("chapterName", chapter);
+            System.out.print(story);
             transform.setParameter("story", story);
             StreamSource xmlFile = new StreamSource(xmlPath);
             StreamResult htmlFile = new StreamResult(new FileOutputStream(output));
