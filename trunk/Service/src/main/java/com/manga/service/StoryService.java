@@ -146,8 +146,11 @@ public class StoryService {
 
     @RequestMapping(value = "/getStory", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public @ResponseBody Stories getStory(@RequestParam("name") String name, HttpServletResponse response) {
-        name = RemoveUTF8.removeAccent(name.toLowerCase());
+        name = RemoveUTF8.toUrlFriendly(name.toLowerCase());
         Story story = storyDAO.getStory(name);
+        if(story == null) {
+            return new Stories();
+        }
         response.addHeader("Access-Control-Allow-Origin", "*");
         return DomainToDTO.convertFromObject(story);
     }
