@@ -1,136 +1,169 @@
-<style type="text/css">
-    #content {
-        width: 100%;
-        border: 1px solid #DDD;
-        margin-top: 5px;
-    }
+<!--<style type="text/css">-->
+<!--#content {-->
+<!--width: 100%;-->
+<!--border: 1px solid #DDD;-->
+<!--margin-top: 5px;-->
+<!--}-->
 
-    #sidebar {
-        width: 280px;
-    }
+<!--#sidebar {-->
+<!--width: 280px;-->
+<!--}-->
 
-    .title h2 {
-        background: #0085DC;
-        padding: 9px 10px;
-        margin: 0 -1px;
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+<!--.title h2 {-->
+<!--background: #0085DC;-->
+<!--padding: 9px 10px;-->
+<!--margin: 0 -1px;-->
+<!--font-size: 14px;-->
+<!--white-space: nowrap;-->
+<!--overflow: hidden;-->
+<!--text-overflow: ellipsis;-->
+<!--}-->
 
-    .title h2 a {
-        color: #FFF;
-    }
+<!--.title h2 a {-->
+<!--color: #FFF;-->
+<!--}-->
 
-    .pagepost {
-        padding: 10px;
-        line-height: 24px;
-        padding-bottom: 0;
-    }
+<!--.pagepost {-->
+<!--padding: 10px;-->
+<!--line-height: 24px;-->
+<!--padding-bottom: 0;-->
+<!--}-->
 
-    .cover img {
-        max-width: 100%;
-        display: block;
-        margin: 10px auto;
-    }
+<!--.cover img {-->
+<!--max-width: 100%;-->
+<!--display: block;-->
+<!--margin: 10px auto;-->
+<!--}-->
 
-    .breadcrumb {
-        margin: 10px -1px;
-        background: #147CE3;
-        color: #FFF;
-        height: 20px;
-        padding: 10px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+<!--.breadcrumb {-->
+<!--margin: 10px -1px;-->
+<!--background: #147CE3;-->
+<!--color: #FFF;-->
+<!--height: 20px;-->
+<!--padding: 10px;-->
+<!--white-space: nowrap;-->
+<!--overflow: hidden;-->
+<!--text-overflow: ellipsis;-->
+<!--}-->
 
-    .data {
-        font-size: 14px;
-        color: #999;
-        margin: 10px;
-        margin-bottom: 0;
-    }
+<!--.data {-->
+<!--font-size: 14px;-->
+<!--color: #999;-->
+<!--margin: 10px;-->
+<!--margin-bottom: 0;-->
+<!--}-->
 
-    .data .clock {
-        float: right;
-    }
+<!--.data .clock {-->
+<!--float: right;-->
+<!--}-->
 
-    a:link {
-        color: black;
-    }
+<!--a:link {-->
+<!--color: black;-->
+<!--}-->
 
-    a:visited, a:hover {
-        color: blue;
-    }
+<!--a:visited, a:hover {-->
+<!--color: blue;-->
+<!--}-->
 
-    body {
-        background: #28282C;
-    }
-</style>
-</head>
-<body>
+<!--body {-->
+<!--background: #28282C;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
+<!--<body>-->
 
-<!-- End Header -->
+<!--&lt;!&ndash; End Header &ndash;&gt;-->
 
-<div id="wrapper" style="background: #28282C">
+<!--<div id="wrapper" style="background: #28282C">-->
 
-    <div id="casing">
-        <div id="content">
-            <div class="main section" id="main">
-                <div class="widget Blog" id="Blog1">
-                    <div class="blog-posts">
-                        <!-- google_ad_section_start(name=default) -->
-                        <div class="title">
-                            <a name="5197127098284532974"></a>
-                            <input type="hidden" id="storyName" value="{{story.name}}"/>
+<!--<div id="casing">-->
+<!--<div id="content">-->
+<!--<div class="main section" id="main">-->
+<!--<div class="widget Blog" id="Blog1">-->
+<!--<div class="blog-posts">-->
+<!--&lt;!&ndash; google_ad_section_start(name=default) &ndash;&gt;-->
+<!--<div class="title">-->
+<!--<a name="5197127098284532974"></a>-->
+<!--<input type="hidden" id="storyName" value="{{story.name}}"/>-->
 
-                            <h2>
-                                <a href="./Golden Time 04 Subtitle Indonesia_files/Golden Time 04 Subtitle Indonesia.html"
-                                   rel="bookmark" title="Permanent Link to Golden Time 04 Subtitle Indonesia">{{story.name}}</a>
-                            </h2>
-                        </div>
-                        <div class="data">
-                            <span class="author">Posted by : Zul fikar</span>
-                            <span class="clock">Monday, November 4, 2013</span>
-                        </div>
-                        <div class="pagepost">
-                            <div class="cover" data-ng-repeat="image in imageLinks track by $index">
-                                <img data-ng-src="{{image}}">
+<!--<h2>-->
+<!--<a href="./Golden Time 04 Subtitle Indonesia_files/Golden Time 04 Subtitle Indonesia.html"-->
+<!--rel="bookmark" title="Permanent Link to Golden Time 04 Subtitle Indonesia">{{story.name}}</a>-->
+<!--</h2>-->
+<!--</div>-->
+<!--<div class="data">-->
+<!--<span class="author">Posted by : Zul fikar</span>-->
+<!--<span class="clock">Monday, November 4, 2013</span>-->
+<!--</div>-->
+<!--<div class="pagepost">-->
+<!--<div class="cover" data-ng-repeat="image in imageLinks track by $index">-->
+<!--<img data-ng-src="{{image}}">-->
 
-                                <div style="clear: both;"></div>
-                            </div>
-                        </div>
+<!--<div style="clear: both;"></div>-->
+<!--</div>-->
+<!--</div>-->
 
-                        <!-- google_ad_section_end -->
-                    </div>
+<!--&lt;!&ndash; google_ad_section_end &ndash;&gt;-->
+<!--</div>-->
 
-                    <div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
-                        <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
-                                ng-model="item" ng-change="selectChapter()"></select>
-                    </div>
-                    <!--<script>-->
-                    <!--function selectChapter(){-->
-                    <!--var storyName = document.getElementById("storyName").value;-->
-                    <!--var chapter = document.getElementById("chapter").value;-->
-                    <!--var url = window.location.protocol + window.location.host + window.location.pathname + "#/view/" + storyName + "/" + chapter;-->
-                    <!--window.open(url);-->
-                    <!--}-->
-                    <!--</script>-->
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
+<!--<div style="text-align: center" ng-if="story.chapters.chapter.length > 0">-->
+<!--<select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"-->
+<!--ng-model="item" ng-change="selectChapter()"></select>-->
+<!--</div>-->
 
-    </div>
-    <div class="clear"></div>
+<!--<div class="clear"></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+<!--<div class="clear"></div>-->
+<!--</div>-->
+<!--&lt;!&ndash; Wrapper &ndash;&gt;-->
+<!--<footer id="footer">-->
+
+<!--<div class="copyright">-->
+<!--<p>- Copyright © 2015 Manga Book - Design By Group 3 -</p>-->
+<!--</div>-->
+<!--<div class="clear"></div>-->
+<!--</footer>-->
+
+
+<div class="row">
+    <p class="text-center" style="padding: 10px;">
+        <a style="font-size:2rem;" href="#/view/{{story.name}}" class="name_manga">{{story.name}}</a>
+    </p>
+
+    <p class="text-center">
+        <label for="select_chap" class="inline control_chap">Chapter</label>
+<span class="picker inline">
+<div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
+    <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
+            ng-model="item" ng-change="selectChapter()"></select>
 </div>
-<!-- Wrapper -->
-<footer id="footer">
+</span>
+    </p>
+</div>
 
-    <div class="copyright">
-        <p>- Copyright © 2015 Manga Book - Design By Group 3 -</p>
-    </div>
-    <div class="clear"></div>
-</footer>
+<div class=" text-center" id="div_image" style="display: block;">
+
+    <p data-c="57" data-ng-repeat="image in imageLinks track by $index"><img class="load" data-ng-src="{{image}}"
+                        style="border: 5px solid rgb(0, 0, 0);"></p>
+</div>
+
+<div class="row">
+
+    <p class="text-center">
+        <label for="select_chap" class="inline control_chap">Chapter</label>
+<span class="picker inline">
+<div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
+    <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
+            ng-model="item" ng-change="selectChapter()"></select>
+</div>
+</span>
+    </p>
+    <p class="text-center" style="padding: 10px;">
+        <a style="font-size:2rem;" href="http://otakufc.com/manga/Dare-Mo-Shiranai-Tou-No-Aru-Machi" class="name_manga">Dare
+            Mo Shiranai Tou No Aru Machi</a>
+    </p>
+</div>

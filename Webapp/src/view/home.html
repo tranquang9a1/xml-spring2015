@@ -1,46 +1,56 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
-	<!--<link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">-->
-	<!--<title>Manga Book</title>-->
-	<!--<link type="text/css" rel="stylesheet" href="css.css">-->
-<!--</head>-->
-<!--<body>-->
-<div id="wrapper">
-	<div id="casing">
-		<div id="related-wrap">
-			<div class="sidebar section" id="rela1">
-				<div class="widget HTML" id="HTML2">
-					<h2 class="title">Lastest Update</h2>
-                    <div class="widget-content" data-ng-repeat="story in stories">
-                        <ul class="label_with_thumbs">
-                            <li class="clearfix">
-                                <a href="view.html">
-                                    <div ng-if="story.image == 'Đang cập nhật..'">
-                                        <img class="label_thumb" src=../image/avatar.jpg>
-                                    </div>
-                                    <div ng-if="story.image != 'Đang cập nhật..'">
-                                        <img class="label_thumb" src="{{story.image}}">
-                                    </div>
-                                </a>
-                                <a href="#/view/{{getLink(story.name)}}" target="_top">{{story.name}}</a>
-                                <br> Tác giả: <span id="author">{{story.author}}</span>
-                                <br><div ng-if="story.type.length > 0"> Thể loại: <span id="genre" data-ng-repeat="type in story.type">{{type}},</span></div>
-                                <div ng-if="story.type == 'Đang cập nhật..'"> Thể loại: <span id="genre">Đang cập nhật..</span></div>
-                                <br> Chap mới nhất: <span id="newchap">{{story.newest_chap}}</span>
-                                <br> <span id="description" class="line-clamp">{{story.description}}</span>
-                            </li>
-                        </ul>
+
+<div class="row block_content">
+    <div class="twelve columns">
+        <div class="block_content">
+            <section class="tabs">
+                <ul class="tab-nav">
+                    <li class="active"><a href="#" class="title_content" style="color: #73eda4;">Truyện mới</a></li>
+                </ul>
+
+                <div class="tab-content row active" >
+                    <div class="no_margin_left six columns inline small_content" data-ng-repeat="story in stories">
+                        <a title="{{story.name}}"
+                           href="#/view/{{getLink(story.name)}}"
+                           class="link_new inline four columns">
+                            <img ng-if="story.image == 'Đang cập nhật..'" src="../image/avatar.jpg"
+                                 alt="{{story.name}}" title="{{story.name}}">
+                            <img ng-if="story.image != 'Đang cập nhật..'" src="{{story.image}}"
+                                 alt="{{story.name}}" title="{{story.name}}">
+                        </a>
+
+                        <div class="eight columns inline content_new">
+                            <a title="{{story.name}}"
+                               href="#/view/{{getLink(story.name)}}" class="name_manga">{{story.name}}</a>
+
+                            <p><strong>Tác giả: </strong>{{story.author}}</p>
+
+                            <p><strong>Nhóm dịch: </strong>{{story.author}}</p>
+
+                            <!--<p><strong>Type: </strong><a  ng-if="story.type.length > 0" data-ng-repeat="type in story.type">{{type}},</a></p>-->
+                            <!--<p ng-if="story.type == 'Đang cập nhật..'" data-ng-repeat="type in story.type"><strong>Type: </strong>Đang cập nhật..</p>-->
+                            <!--<div >-->
+                              <!---->
+                            <!--</div>-->
+                            <!--<div ng-if="story.type == 'Đang cập nhật..'">-->
+                                <!---->
+                            <!--</div>-->
+                            <!--</p>-->
+                        </div>
                     </div>
-				</div>
-			</div>
-		</div>
-	</div>
-    <div><button ng-click="addMore()">add more</button></div>
-	<div class="clear"></div>
+                </div>
+            </section>
+        </div>
+    </div>
 </div>
-<!-- Wrapper -->
+
+</div>
+</section>
+</div>
+</div>
+</div>
+
+
+
 
 
 <!--</body>-->
