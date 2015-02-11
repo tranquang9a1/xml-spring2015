@@ -67,20 +67,29 @@ app.controller("StoriesController", function ($scope, $routeParams, StoriesFacto
         });
     };
 });
+app.controller("SearchController",function($scope,StoriesFactory) {
+    $scope.searchText ="";
+    $scope.searchResult = [];
+    $scope.search = function(){
+        StoriesFactory.getSearchRequest($scope.searchText).then(function (data) {
+            $scope.searchResult = data
+        });
+    }
+});
 app.controller("ChapterController", function ($scope, $routeParams, StoriesFactory) {
     var name = $routeParams.name;
     var chapter = $routeParams.chapter;
     var imageProcess = function () {
-        if ($scope.story.chapters.chapter.length > 0) {
+        if (StoriesFactory.getStory().chapters.chapter.length > 0) {
             var flag = 0;
-            for (var i = 0; i < $scope.story.chapters.chapter.length && flag == 0; i++) {
-                if ($scope.story.chapters.chapter[i].name == chapter) {
-                    $scope.chapter = $scope.story.chapters.chapter[i];
+            for (var i = 0; i < StoriesFactory.getStory().chapters.chapter.length && flag == 0; i++) {
+                if (StoriesFactory.getStory().chapters.chapter[i].name == chapter) {
+                    $scope.chapter = StoriesFactory.getStory().chapters.chapter[i];
                     flag = 1;
                 }
             }
         } else {
-            $scope.chapter = $scope.story.chapters.chapter;
+            $scope.chapter = StoriesFactory.getStory().chapters.chapter;
         }
         $scope.imageLinks = $scope.chapter.data.split('|');
     }

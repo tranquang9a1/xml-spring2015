@@ -135,7 +135,7 @@
     </p>
 
     <p class="text-center">
-        <label for="select_chap" class="inline control_chap">Chapter</label>
+        <label for="select_chap" class="inline control_chap">Chapter {{chapter.name}}</label>
 <span class="picker inline">
 <div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
     <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
@@ -154,7 +154,7 @@
 <div class="row">
 
     <p class="text-center">
-        <label for="select_chap" class="inline control_chap">Chapter</label>
+        <label for="select_chap" class="inline control_chap">Chapter {{chapter.name}}</label>
 <span class="picker inline">
 <div style="text-align: center" ng-if="story.chapters.chapter.length > 0">
     <select ng-options="chapter as chapter.name for chapter in story.chapters.chapter"
@@ -163,7 +163,6 @@
 </span>
     </p>
     <p class="text-center" style="padding: 10px;">
-        <a style="font-size:2rem;" href="http://otakufc.com/manga/Dare-Mo-Shiranai-Tou-No-Aru-Machi" class="name_manga">Dare
-            Mo Shiranai Tou No Aru Machi</a>
+        <a style="font-size:2rem;" href="http://otakufc.com/manga/Dare-Mo-Shiranai-Tou-No-Aru-Machi" class="name_manga">{{story.name}}</a>
     </p>
 </div>
