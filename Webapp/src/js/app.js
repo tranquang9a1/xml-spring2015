@@ -32,16 +32,20 @@ app.controller("IndexController", function ($scope, $routeParams, StoriesFactory
     $scope.stories = [];
 
     if (StoriesFactory.getStories().length == 0 || StoriesFactory.getType() != null) {
+        $scope.loading = true;
         StoriesFactory.getStoriesRequest(null, 0).then(function (data) {
             $scope.stories = data
+            $scope.loading = false;
         });
     } else {
         $scope.stories = StoriesFactory.getStories();
     }
     $scope.addMore = function () {
         var page = +StoriesFactory.getPage() + 1;
+        $scope.loading = true;
         StoriesFactory.getStoriesRequest(null, page).then(function (data) {
             $scope.stories = data
+            $scope.loading = false;
         });
     };
 });
@@ -54,16 +58,20 @@ app.controller("StoriesController", function ($scope, $routeParams, StoriesFacto
     $scope.stories = [];
     if (StoriesFactory.getStories().length == 0 || StoriesFactory.getType() != type || StoriesFactory.getType() == null) {
         StoriesFactory.resetPage();
+        $scope.loading = true;
         StoriesFactory.getStoriesRequest(type, page).then(function (data) {
             $scope.stories = data
+            $scope.loading = false;
         });
     } else {
         $scope.stories = StoriesFactory.getStories();
     }
     $scope.addMore = function () {
         page = +StoriesFactory.getPage() + 1;
+        $scope.loading = true;
         StoriesFactory.getStoriesRequest(type, page).then(function (data) {
             $scope.stories = data
+            $scope.loading = false;
         });
     };
 });
@@ -94,8 +102,10 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
         $scope.imageLinks = $scope.chapter.data.split('|');
     }
     if (StoriesFactory.getStory() == null) {
+        $scope.loading = true;
         StoriesFactory.getStoryRequest(name).then(function (data) {
             $scope.story = data;
+            $scope.loading = false;
             $scope.item = $scope.story.chapters.chapter[0];
             imageProcess();
         });
@@ -117,8 +127,10 @@ app.controller("StoryController", function ($scope, $routeParams, StoriesFactory
     console.log(name);
     if (StoriesFactory.getStories().length == 0) {
         $scope.story = [];
+        $scope.loading = true;
         StoriesFactory.getStoryRequest(name).then(function (data) {
             $scope.story = data
+            $scope.loading = false;
         });
     } else {
         var tmp = StoriesFactory.getStories();
@@ -188,6 +200,21 @@ app.factory("StoriesFactory", function ($http) {
     factory.getStories = function () {
         return stories;
     }
+    factory.getSearchRequest = function(keyword){
+        var url = "http://lazyeng.com:8080/xmlservice/getByName?name=" + keyword + "&limit=12&offset=0";
+        return $http.get(url).then(function (response) {
+            var json = $.xml2json(response.data);
+            if (json != "") {
+                var tmp = json.story
+                if (tmp.length == null) {
+                    tmp = "[" + JSON.stringify(tmp) + "]";
+                }
+                listSearch = tmp;
+            }
+            return listSearch
+        });
+        return listSearch
+    };
     factory.getStoryRequest = function (name) {
         var url = "http://lazyeng.com:8080/xmlservice/getStory?name=" + name;
         return $http.get(url).then(function (response) {
@@ -211,4 +238,27 @@ app.factory("StoriesFactory", function ($http) {
         pageFlag = 0;
     }
     return factory;
+})
+app.directive('loading', function () {
+    return {
+        restrict: 'E',
+        replace:true,
+        template: '<div id="circularG" style="margin: auto">' +
+        '<div id="circularG_1" class="circularG">'+
+        '</div><div id="circularG_2" class="circularG">'+
+            '</div><div id="circularG_3" class="circularG">'+
+            '</div><div id="circularG_4" class="circularG">'+
+            '</div><div id="circularG_5" class="circularG">'+
+            '</div><div id="circularG_6" class="circularG">'+
+            '</div><div id="circularG_7" class="circularG">'+
+            '</div><div id="circularG_8" class="circularG"></div></div>',
+        link: function (scope, element, attr) {
+            scope.$watch('loading', function (val) {
+                if (val)
+                    $(element).show();
+                else
+                    $(element).hide();
+            });
+        }
+    }
 })
