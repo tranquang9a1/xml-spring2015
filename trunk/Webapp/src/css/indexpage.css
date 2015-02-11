@@ -48,7 +48,7 @@ body {
     display: block;
     padding: 0 16px;
     white-space: nowrap;
-    color: #73eda4;
+    color: #73eda4 !important;
     text-transform: uppercase;
     height: 59.36817px;
     line-height: 57.36817px;
@@ -227,7 +227,7 @@ strong {
     border-bottom: 1px solid transparent;
 }
 .row .six.columns {
-    width: 31%;
+    width: 33%;
 }
 .small_content {
     min-height: 165px;
@@ -310,7 +310,7 @@ table thead th, table tbody td, table tr td {
     border-bottom: 1px solid #4b4e56;
 }
 table tr td:first-child a{
-    color: #73eda4;
+    color: #73eda4 !important;
 }
 .text-center {
     text-align: center;
@@ -355,4 +355,7 @@ a {
     cursor: pointer;
     font-size: 16px;
     font-size: 1rem;
+}
+.no_margin_left {
+    margin-left: 0 !important;
 }
