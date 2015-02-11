@@ -4,7 +4,7 @@
         <div class="block_content">
             <section class="tabs">
                 <ul class="tab-nav">
-                    <li class="active"><a href="#" class="title_content" style="color: #73eda4;">Truyện mới</a></li>
+                    <li class="active"><a href="#" class="title_content" style="color: #73eda4!important;">Truyện mới</a></li>
                 </ul>
 
                 <div class="tab-content row active" >
@@ -26,8 +26,9 @@
 
                             <p><strong>Nhóm dịch: </strong>{{story.author}}</p>
 
-                            <!--<p><strong>Type: </strong><a  ng-if="story.type.length > 0" data-ng-repeat="type in story.type">{{type}},</a></p>-->
-                            <!--<p ng-if="story.type == 'Đang cập nhật..'" data-ng-repeat="type in story.type"><strong>Type: </strong>Đang cập nhật..</p>-->
+                            <p ng-hide="story.type == 'Đang cập nhật..'" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"><strong>Type: </strong><a  ng-if="story.type.length > 0" data-ng-repeat="type in story.type">{{type}},</a></p>
+                            <p style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"
+                               ng-if="story.type == 'Đang cập nhật..'"><strong>Type: </strong>Đang cập nhật..</p>
                             <!--<div >-->
                               <!---->
                             <!--</div>-->
