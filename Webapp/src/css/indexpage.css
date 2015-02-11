@@ -359,3 +359,16 @@ a {
 .no_margin_left {
     margin-left: 0 !important;
 }
+#result {
+    position: absolute;
+    z-index: 999999;
+    height: auto;
+    padding: 10px;
+    background-color: rgba(10,10,10,0.85);
+    margin-top: 35px;
+    padding: 10px;
+}
+input.narrow, .input.narrow {
+    width: 30.66667%;
+    margin: 0;
+}
