@@ -96,7 +96,7 @@ a img {border-width:0;}
 }
 
 #menujohanes ul li:hover {
-    background: #0073BE;
+    position: relative; border-bottom:4px solid #73eda4; z-index: 1000;
 }
 /* Search */
 .search-form {
