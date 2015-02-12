@@ -34,7 +34,7 @@
         <!-- how many seperators are there in the string... -->
         <xsl:variable name="countSeperators"
                       select="string-length($String) - string-length(translate($String,'|',''))"/>
-        <xsl:variable name="count" select="1"/>
+
         <xsl:choose>
 
             <xsl:when test="$countSeperators &gt;= 1">
