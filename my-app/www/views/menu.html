@@ -1,0 +1,38 @@
+<ons-page modifier="menu-page" ng-controller="MenuController">
+    <ons-toolbar modifier="transparent"></ons-toolbar>
+
+    <ons-list class="menu-list">
+        <ons-list-item class="menu-item" ng-click="goHome()">
+            <ons-icon icon="fa-home"></ons-icon>
+            Home
+        </ons-list-item>
+
+        <ons-list-item class="menu-item" ng-click="isShowLangMenu = !isShowLangMenu ">
+            <ons-icon icon="fa-language"></ons-icon>
+            Language
+        </ons-list-item>
+
+    </ons-list>
+
+    <ons-list class="bottom-menu-list lang-items" style="margin-left: 65px" ng-show="isShowLangMenu">
+        <ons-list-item class="bottom-menu-item" ng-click="changePage('views/home.html','Vietnamese')">
+            <span id="Vietnamese">Vietnamese</span>
+        </ons-list-item>
+
+        <ons-list-item class="bottom-menu-item" ng-click="changePage('views/home.html','English')">
+            <span id="English">English</span>
+        </ons-list-item>
+
+        <ons-list-item class="bottom-menu-item" ng-click="changePage('views/home.html','Japanese')">
+            <span id="Japanese">Japanese Raw</span>
+        </ons-list-item>
+    </ons-list>
+
+    <ons-list class="menu-list">
+        <ons-list-item class="menu-item" ng-click="menu.setMainPage('views/about.html', {closeMenu: true})">
+            <ons-icon icon="fa-info-circle"></ons-icon>
+            About
+        </ons-list-item>
+
+    </ons-list>
+</ons-page>

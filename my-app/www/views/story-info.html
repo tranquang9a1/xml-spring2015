@@ -1,0 +1,41 @@
+<ons-page ng-controller="StoriesInfoController" Style="background-color: #eee;">
+    <div class="brg navigation-bar">
+        <div class="navigation-bar__left"><ons-back-button></ons-back-button></div>
+        <div class="navigation-bar__center text-ellipsis" style="font-weight: 700;">{{info.name.toUpperCase()}}</div>
+        <div class="navigation-bar__right"></div>
+    </div>
+    <div class="imageArea"><img ng-src="{{getImage(info.image)}}" class="profile-image"></div>
+    <div id="infoArea" class="profile-card">
+        <div id="desArea" class="desArea">
+            <div class="profile-name">{{info.name}}</div>
+            <div id="description" class="profile-desc line-clamp">{{info.description}}</div>
+
+            <div class="profile-name">Author</div>
+            <div class="profile-desc">{{info.author}}</div>
+
+            <div class="profile-name">Type</div>
+            <div class="profile-desc">{{getType()}}</div>
+
+            <div class="profile-name">Status</div>
+            <div class="profile-desc">{{info.status}}</div>
+
+            <div class="profile-name">First Published</div>
+        </div>
+        <div id="viewMoreText" class="profile-viewMore" ng-click="viewMore()">View More</div>
+
+    </div>
+    <ons-list style="margin:0px 10px;border: none;">
+        <ons-list-header class="chapterText">Chapters</ons-list-header>
+        <ons-list-item modifier="chevron" class="item" ng-repeat="chapter in chapters" ng-click="viewChapter($index)">
+            <ons-row>
+                <ons-col>
+                    <header>
+                        <div class="item-title">{{chapter.name}}</div>
+                    </header>
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+    </ons-list>
+
+</ons-page>
+

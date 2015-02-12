@@ -1,0 +1,8 @@
+
+<ons-page ng-controller="ChapterDetailController" ng-device-backbutton="menu.setSwipeable(true);app.navi.home.popPage();">
+    <ons-carousel swipeable overscrollable auto-scroll fullscreen var="carousel">
+        <ons-carousel-item ng-repeat="image in images track by $index">
+            <img ng-src="{{image}}" style="width: 100%;height: 100%">
+        </ons-carousel-item>
+    </ons-carousel>
+</ons-page>
