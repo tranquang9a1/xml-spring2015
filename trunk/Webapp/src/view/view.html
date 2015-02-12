@@ -269,11 +269,11 @@
             <tbody>
             <tr ng-if="story.chapters.chapter.length > 0" data-ng-repeat="chapter in story.chapters.chapter">
                 <td><a href="#view/{{story.name}}/{{chapter.name}}">{{chapter.name}}</a></td>
-                <td><a href="#view/{{story.name}}/{{chapter.chapter.name}}">PDF<i class="icon-large icon-download-alt"></i></a></td>
+                <td><a href="http://lazyeng.com:8080/xmlservice/download?story={{story.name}}&chapter={{chapter.name}}">PDF<i class="icon-large icon-download-alt"></i></a></td>
             </tr>
             <tr ng-if="story.chapters.chapter.length == NULL" >
                 <td><a href="#view/{{story.name}}/{{story.chapters.chapter.name}}">{{story.chapters.chapter.name}}</a></td>
-                <td><a href="#view/{{story.name}}/{{story.chapters.chapter.name}}">PDF</a></td>
+                <td><a href="http://lazyeng.com:8080/xmlservice/download?story={{story.name}}&chapter={{story.chapters.chapter.name}}">PDF</a></td>
             </tr>
             </tbody>
         </table>

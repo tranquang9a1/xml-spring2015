@@ -19,7 +19,7 @@
     <div style="top: 0px;" class="navbar" id="menu">
         <div class="row" style="padding-top: 10px;">
             <h1 class="three columns logo" id="logo">
-                <a href="http://otakufc.com/" style="color: #d04526!important;font-size: 29px;">
+                <a href="/comic/view/#" style="color: #d04526!important;font-size: 29px;">
                     <img src="../image/logo.png" style="width: 68px;vertical-align: middle;">
                     RoboManga
                 </a>
@@ -47,7 +47,7 @@
 
     </li>
     <ul id="result" class="narrow text input" ng-show="searchResult.length">
-        <p ng-repeat="result in searchResult"><a href="#">{{result.name}}</a></p>
+        <p ng-repeat="result in searchResult"><a href="#/view/{{result.name}}">{{result.name}}</a></p>
     </ul>
     <span class="text-center four columns" style="line-height: 34px;width: 32.91489%;">
 				<span class="upper">Thế giới truyện tranh </span>
