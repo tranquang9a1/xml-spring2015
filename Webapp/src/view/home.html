@@ -24,7 +24,7 @@
 
                             <p><strong>Tác giả: </strong>{{story.author}}</p>
 
-                            <p><strong>Nhóm dịch: </strong>{{story.author}}</p>
+                            <p><strong>Nguồn: </strong>{{story.source}}</p>
 
                             <p ng-hide="story.type == 'Đang cập nhật..'" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"><strong>Type: </strong><a  ng-if="story.type.length > 0" data-ng-repeat="type in story.type">{{type}},</a></p>
                             <p style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;"

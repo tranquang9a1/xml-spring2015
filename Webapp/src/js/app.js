@@ -118,7 +118,7 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
         $scope.story = StoriesFactory.getStory();
         imageProcess();
     }
-    $scope.selectChapter = function ($index) {
+    $scope.selectChapter = function () {
         var story = StoriesFactory.getStory();
         var name = story.name;
         var chapter = $scope.item.name;
