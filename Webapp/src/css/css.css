@@ -219,7 +219,10 @@ a img {border-width:0;}
     position:relative;
     width:64px;
     height:64px}
-
+#circularG2{
+    position:relative;
+    width:24px;
+    height:24px}
 .circularG{
     position:absolute;
     background-color:#FA8A28;
@@ -376,3 +379,31 @@ a img {border-width:0;}
         transform:scale(.3)}
 
 }
+.myButton {
+    background-color:#768d87;
+    -moz-border-radius:28px;
+    -webkit-border-radius:28px;
+    border-radius:28px;
+    border:1px solid #566963;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:arial;
+    font-size:15px;
+    padding:11px 20px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2b665e;
+}
+.myButton:hover {
+    background-color:#6c7c7c;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+
+
+
+
+

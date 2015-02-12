@@ -40,8 +40,10 @@
     <li class="append field eight columns" style="width: 64.95745%;">
         <input class="xwide text input" id="search_input" type="text" placeholder="Nhập tên manga hoặc tên tác giả"
                ng-model="searchText" ng-change="search()">
-        <span class="adjoined"><i class="icon-search" id="bt_seacrch"
+        <span class="adjoined"><i class="icon-search" id="bt_search" ng-show="searchText == ''"
+                                  style="margin-top: -1px;color: #f4b350;"></i><i class="icon-spinner icon-spin icon-large" id="bt_search" ng-show="searchText != ''"
                                   style="margin-top: -1px;color: #f4b350;"></i></span>
+
 
     </li>
     <ul id="result" class="narrow text input" ng-show="searchResult.length">
@@ -51,6 +53,9 @@
 				<span class="upper">Thế giới truyện tranh </span>
 				<span class="big_text hi_light"> RoboManga</span>
 			</span>
+</div>
+<div class="row block_content" id="favorite" ng-controller="SearchController">
+
 </div>
 
 

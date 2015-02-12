@@ -75,13 +75,18 @@ app.controller("StoriesController", function ($scope, $routeParams, StoriesFacto
         });
     };
 });
-app.controller("SearchController",function($scope,StoriesFactory) {
-    $scope.searchText ="";
-    $scope.searchResult = [];
-    $scope.search = function(){
-        StoriesFactory.getSearchRequest($scope.searchText).then(function (data) {
-            $scope.searchResult = data
-        });
+app.controller("SearchController", function ($scope, StoriesFactory) {
+    $scope.searchText = "";
+    $scope.searchResult = []
+    $scope.search = function () {
+        if ($scope.searchText != "") {
+            StoriesFactory.getSearchRequest($scope.searchText).then(function (data) {
+                $scope.searchResult = data
+            });
+        } else {
+            $scope.searchResult = null;
+        }
+
     }
 });
 app.controller("ChapterController", function ($scope, $routeParams, StoriesFactory) {
@@ -101,7 +106,7 @@ app.controller("ChapterController", function ($scope, $routeParams, StoriesFacto
         }
         $scope.imageLinks = $scope.chapter.data.split('|');
     }
-    if (StoriesFactory.getStory() == null) {
+    if (StoriesFactory.getStory() == null || StoriesFactory.getStory().name != name ) {
         $scope.loading = true;
         StoriesFactory.getStoryRequest(name).then(function (data) {
             $scope.story = data;
@@ -200,19 +205,19 @@ app.factory("StoriesFactory", function ($http) {
     factory.getStories = function () {
         return stories;
     }
-    factory.getSearchRequest = function(keyword){
-        var url = "http://lazyeng.com:8080/xmlservice/getByName?name=" + keyword + "&limit=12&offset=0";
-        return $http.get(url).then(function (response) {
-            var json = $.xml2json(response.data);
-            if (json != "") {
-                var tmp = json.story
-                if (tmp.length == null) {
-                    tmp = "[" + JSON.stringify(tmp) + "]";
+    factory.getSearchRequest = function (keyword) {
+            var url = "http://lazyeng.com:8080/xmlservice/getByName?name=" + keyword + "&limit=12&offset=0";
+            return $http.get(url).then(function (response) {
+                var json = $.xml2json(response.data);
+                if (json != "") {
+                    var tmp = json.story
+                    if (tmp.length == null) {
+                        tmp = "[" + JSON.stringify(tmp) + "]";
+                    }
+                    listSearch = tmp;
                 }
-                listSearch = tmp;
-            }
-            return listSearch
-        });
+                return listSearch
+            });
         return listSearch
     };
     factory.getStoryRequest = function (name) {
@@ -237,20 +242,21 @@ app.factory("StoriesFactory", function ($http) {
     factory.resetPage = function () {
         pageFlag = 0;
     }
+
     return factory;
 })
 app.directive('loading', function () {
     return {
         restrict: 'E',
-        replace:true,
+        replace: true,
         template: '<div id="circularG" style="margin: auto">' +
-        '<div id="circularG_1" class="circularG">'+
-        '</div><div id="circularG_2" class="circularG">'+
-            '</div><div id="circularG_3" class="circularG">'+
-            '</div><div id="circularG_4" class="circularG">'+
-            '</div><div id="circularG_5" class="circularG">'+
-            '</div><div id="circularG_6" class="circularG">'+
-            '</div><div id="circularG_7" class="circularG">'+
+            '<div id="circularG_1" class="circularG">' +
+            '</div><div id="circularG_2" class="circularG">' +
+            '</div><div id="circularG_3" class="circularG">' +
+            '</div><div id="circularG_4" class="circularG">' +
+            '</div><div id="circularG_5" class="circularG">' +
+            '</div><div id="circularG_6" class="circularG">' +
+            '</div><div id="circularG_7" class="circularG">' +
             '</div><div id="circularG_8" class="circularG"></div></div>',
         link: function (scope, element, attr) {
             scope.$watch('loading', function (val) {
