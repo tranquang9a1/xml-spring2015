@@ -241,10 +241,10 @@ a:hover {
     color: #c03d20;
 }
 .link_new img {
-    max-width: 83px !important;
-    max-height: 100px !important;
-    width: 83px !important;
-    height: 100px !important;
+    max-width: 95px !important;
+    max-height: 120px !important;
+    width: 95px !important;
+    height: 120px !important;
     min-width: 83px !important;
     min-height: 100px !important;
 }
@@ -371,4 +371,11 @@ a {
 input.narrow, .input.narrow {
     width: 30.66667%;
     margin: 0;
+}
+.chaptername{
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
