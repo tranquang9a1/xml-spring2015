@@ -1,0 +1,54 @@
+<ons-navigator var="app.navi.home">
+    <ons-page ng-controller="StoriesListController" when-scrolled="getMoreData()" ng-model="isEmpty">
+
+        <div class="brg navigation-bar">
+            <div class="navigation-bar__left"><ons-toolbar-button ng-click="menu.toggle()" class="navigation-bar__left">
+                <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+            </ons-toolbar-button></div>
+            <div class="navigation-bar__center text-ellipsis" style="font-weight: 700;"><ons-icon icon="fa-home" size="28px"fixed-width="false" style="width: 28px"></ons-icon>
+                <span ng-if="lang == 'all'" style="font-weight: 700;">Manga</span>
+                <span ng-if="lang != 'all'" style="font-weight: 700;">{{lang}}</span></div>
+            <div class="navigation-bar__right"></div>
+        </div>
+
+
+        <div class="navigation-bar" style="background: darkorange" ng-hide="searchable">
+            <div class="navigation-bar__center">
+
+                <input type="search" value="" placeholder="Search" class="search-input" ng-model="searchKey" ng-change="getDataByName()">
+
+            </div>
+        </div>
+
+        <div id="errorText" ng-hide="!isEmpty"></div>
+        <ons-list id="story-list" ng-if="lang == 'all'" ng-hide="isEmpty">
+            <ons-list-item modifier="chevron" class="item" ng-repeat="item in items" ng-click="showDetail($index)">
+                <ons-row>
+                    <ons-col width="90px">
+                        <img ng-src="{{getImage(item.image)}}" class="item-thum">
+                    </ons-col>
+                    <ons-col>
+                        <header>
+                            <div class="item-title text-ellipsis" style="width: 250px">{{item.name}}</div>
+                            <span class="item-label">{{item.update_date*1000 | date: 'yyyy-MM-dd'}}</span>
+
+                        </header>
+                        <p class="item-desc">{{item.author}}</p>
+                        <p class="item-desc text-ellipsis">{{item.newest_chap}}</p>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+
+        <ons-list id="story-list-lang" style="background: #eee" ng-if="lang !='all'" ng-hide="isEmpty">
+            <ons-list-item modifier="chevron" class="item-area-float" ng-repeat="item in items" ng-click="showDetail($index)">
+                <img ng-src="{{getImage(item.image)}}" class="item-image-float">
+                <div class="item-title-float">{{item.name}}</div>
+            </ons-list-item>
+        </ons-list>
+
+
+
+        <!--<div id="btn_loadMore" class="story-viewMore" ng-click="getMoreData()">View More</div>-->
+    </ons-page>
+</ons-navigator>
