@@ -31,7 +31,7 @@
             <fo:page-sequence master-reference="x">
                 <fo:static-content flow-name="xsl-region-before">
                     <fo:block font-size="14pt" font-family="Arial" line-height="24pt"
-                              background-color="cyan" space-after.optimum="15pt" text-align="center"
+                             space-after.optimum="15pt" text-align="center"
                             >
                         Story:  <xsl:value-of select="$story" /> -  Chapter: <xsl:value-of select="$chapterName" /> - Copyright: Group 3 - XML
                     </fo:block>
@@ -47,7 +47,7 @@
                                             <fo:table-cell>
                                                 <fo:block text-align="center">
                                                     <xsl:call-template name="SplitLinks">
-                                                        <xsl:with-param name="pLinks" select="data"/>
+                                                        <xsl:with-param name="String" select="data"/>
                                                     </xsl:call-template>
 
                                                 </fo:block>
@@ -65,24 +65,24 @@
 
 
     <xsl:template name="SplitLinks">
-        <xsl:param name="pLinks"/>
+        <xsl:param name="String"/>
         <!-- how many seperators are there in the string... -->
-        <xsl:variable name="vCountSeperators" select="string-length($pLinks) - string-length(translate($pLinks,'|',''))"/>
+        <xsl:variable name="count" select="string-length($String) - string-length(translate($String,'|',''))"/>
         <xsl:choose>
 
-            <xsl:when test="$vCountSeperators &gt;= 1">
+            <xsl:when test="$count &gt;= 1">
 
                 <fo:block text-align="center">
                     <fo:external-graphic content-height="scale-to-fit" height="500px"  content-width="500px" scaling="non-uniform">
                         <xsl:attribute name = "src">
-                            <xsl:value-of select="substring-before($pLinks,'|')"/>
+                            <xsl:value-of select="substring-before($String,'|')"/>
                         </xsl:attribute>
                     </fo:external-graphic>
 
                 </fo:block>
 
                 <xsl:call-template name="SplitLinks">
-                    <xsl:with-param name="pLinks" select="substring-after($pLinks,'|')"/>
+                    <xsl:with-param name="String" select="substring-after($String,'|')"/>
                 </xsl:call-template>
             </xsl:when>
         </xsl:choose>

@@ -36,7 +36,7 @@
             </h1>
             <ul>
                 <li><a href="http://RoboManga.com/" title="Home" class="title">Home</a></li>
-                <li><a href="#/vn/0">Vietnamese</a></li>
+                <li><a href="">Vietnamese</a></li>
                 <li><a href="#/en/0">English</a></li>
                 <li><a href="#/jp/0">Japanese Raw</a></li>
                 <li><a href="#">About Us</a></li>
@@ -62,7 +62,7 @@
 </div>
 
 <c:url value="/res/xml/chapter.xml" var="xmlUrl"/>
-<c:url value="/res/xml/chapter.xsl" var="xslUrl"/>
+<c:url value="http://lazyeng.com:8080/xmlservice/res/xml/chapter.xsl" var="xslUrl"/>
 <c:import url="${sessionScope.xmlPath}" var="xml"/>
 <c:import url="${xslUrl}" var="xsl"/>
 
@@ -79,7 +79,7 @@
 <div class="row">
 
     <p class="text-center" style="padding: 10px;">
-        <a style="font-size:2rem;" href="/exportPDF?story=${sessionScope.story}&chapter=${sessionScope.chapter}" class="name_manga" target="_blank">Download ${sessionScope.story} PDF</a>
+        <a style="font-size:2rem;" href="/xmlservice/exportPDF?story=${sessionScope.story}&chapter=${sessionScope.chapter}" class="name_manga" target="_blank">Download ${sessionScope.story} - Chapter: ${sessionScope.chapter} PDF</a>
     </p>
 </div>
 
@@ -91,10 +91,10 @@
 
     <p><strong>Email: </strong><span class="hi_light">RoboManga@gmail.com</span></p>
 
-    <p><strong>Fanpage: </strong><a href="https://www.facebook.com/pages/Otaku-Fan-Club/735962693161234?fref=ts"
+    <p><strong>Fanpage: </strong><a href="#"
                                     style="color: #f4b350;">QKH Team</a></p>
 
-    <p><strong>Phát triển bởi: </strong><a href="https://www.facebook.com/pages/Otaku-Fan-Club/735962693161234?fref=ts"
+    <p><strong>Phát triển bởi: </strong><a href="#"
                                            style="color: #f4b350;">KhangTN</a></p>
 
     <p><span class="hi_light"> Copyright © 2015 Manga Book - Design By QKH team -</span></p>
